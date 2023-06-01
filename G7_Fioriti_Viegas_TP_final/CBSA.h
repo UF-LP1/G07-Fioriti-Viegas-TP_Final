@@ -3,6 +3,8 @@
 #include "Ccentro_salud.h"
 #include <vector>
 #include <string>
+#include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -16,7 +18,7 @@ public:
 	void Buscar_espera();
 	void buscar_prioridad_receptor(string dni);
 	void imprimir();
-	void to_string();
+	string to_string();
 	void donaciones_provincia();
 };
 
