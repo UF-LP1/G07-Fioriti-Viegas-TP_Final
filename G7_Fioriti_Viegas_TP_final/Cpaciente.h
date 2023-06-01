@@ -9,7 +9,6 @@ using namespace std;
 class Cpaciente
 {
 protected:
-	Cfluido sangre;
 	string nombre;
 	string apellido;
 	time_t fecha;

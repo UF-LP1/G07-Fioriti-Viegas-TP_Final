@@ -1,5 +1,11 @@
 #pragma once
-class Cplasma
+#include "Cfluido.h"
+
+class Cplasma: public Cfluido
 {
+public:
+	Cplasma();
+	~Cplasma();
+	bool VerificarFechaMaxima();
 };
 
