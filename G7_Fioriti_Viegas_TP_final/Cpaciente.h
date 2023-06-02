@@ -9,7 +9,9 @@ using namespace std;
 class Cpaciente
 {
 protected:
-	Cfluido *sustancia;
+	Cfluido* sangre;
+	Cfluido* medula;
+	Cfluido* plasma;
 	string nombre;
 	string apellido;
 	time_t fecha;
