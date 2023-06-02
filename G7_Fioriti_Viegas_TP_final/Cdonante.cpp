@@ -30,3 +30,9 @@ void Cdonante::imprimir()
 {
 	cout << this->to_string() << endl;
 }
+
+ostream& operator<<(ostream& out, Cdonante& C)
+{
+	out << C.to_string() << endl;
+	return out;
+}

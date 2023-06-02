@@ -12,6 +12,6 @@ public:
 	~Cdonante();
 	string to_string();
 	void imprimir();
-	
+	friend ostream& operator<<(ostream& out, Cdonante& C);
 };
 

@@ -11,7 +11,7 @@ public:
 	~CBSA();
 	void agregar_paciente(Cpaciente* nuevo, string nombre_centro, string partido, string direccion);
 	void Buscar_espera();
-	void buscar_prioridad_receptor(string dni);
+	unsigned int buscar_prioridad_receptor(string dni);
 	void imprimir();
 	string to_string();
 	void donaciones_provincia();

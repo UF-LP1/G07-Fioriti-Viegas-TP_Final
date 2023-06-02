@@ -13,5 +13,8 @@ public:
 	string to_string();
 	void imprimir();
 	estados get_estado();
+	string get_dni();
+	unsigned int get_prioridad();
+	friend ostream& operator<<(ostream& out, Cpaciente& C);
 };
 

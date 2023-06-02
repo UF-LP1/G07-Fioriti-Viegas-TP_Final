@@ -30,14 +30,21 @@ void CBSA::Buscar_espera()
 			if (receptor != nullptr)
 				if (receptor->get_estado() != 2)
 					cout << receptor;
-
 		}
 	}
 }
 
-void CBSA::buscar_prioridad_receptor(string dni) 
+unsigned int CBSA::buscar_prioridad_receptor(string dni) 
 {
-	for(i=0;i!=this->)
+	for (int i = 0; i != this->centros.size(); i++) {
+		for (int j = 0; i != this->centros[i]->get_lista().size(); i++) {
+			Creceptor* receptor = dynamic_cast<Creceptor*>(this->centros[i]->get_lista()[j]);
+			if (receptor == nullptr)
+				if (receptor->get_dni() == dni)
+					return receptor->get_prioridad();
+		}
+	}
+	return 0;
 }
 
 void CBSA::imprimir()

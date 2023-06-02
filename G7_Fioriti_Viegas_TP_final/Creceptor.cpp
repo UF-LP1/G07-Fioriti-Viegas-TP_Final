@@ -30,3 +30,18 @@ estados Creceptor::get_estado()
 {
 	return this->estado;
 }
+
+string Creceptor::get_dni()
+{
+	return this->dni;
+}
+
+unsigned int Creceptor::get_prioridad()
+{
+	return this->prioridad;
+}
+
+ostream& operator<<(ostream& out, Cpaciente& C)
+{
+	out << 
+}

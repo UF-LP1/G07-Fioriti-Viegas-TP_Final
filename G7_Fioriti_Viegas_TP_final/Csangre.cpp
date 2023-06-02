@@ -38,3 +38,9 @@ bool Csangre::VerificarFechaMaxima()
 
 	return vencio;
 }
+
+ostream& operator<<(ostream& out, Csangre& C)
+{
+	out << C.to_string() << endl;
+	return out;
+}

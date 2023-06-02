@@ -51,3 +51,9 @@ vector<Cpaciente*> Ccentro_salud::get_lista()
 {
 	return this->pacientes;
 }
+
+ostream& operator<<(ostream& out, Ccentro_salud& C)
+{
+	out << C.to_string() << endl;
+	return out;
+}
