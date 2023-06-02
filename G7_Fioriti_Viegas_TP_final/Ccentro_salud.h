@@ -1,7 +1,10 @@
 #pragma once
 #include <string>
 #include <sstream>
-#include "Cpaciente.h"
+#include <iostream>
+#include <vector>
+#include "Cdonante.h"
+#include "Creceptor.h"
 #include "Cregistro.h"
 
 using namespace std;
@@ -19,5 +22,9 @@ public:
 	~Ccentro_salud();
 	void imprimir();
 	string to_string();
+	string get_nombre();
+	string get_direccion();
+	string get_partido();
+	vector<Cpaciente*> get_lista();
 };
 

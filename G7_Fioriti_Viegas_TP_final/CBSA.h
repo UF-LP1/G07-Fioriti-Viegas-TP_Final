@@ -1,10 +1,5 @@
 #pragma once
-#include "Cpaciente.h"
 #include "Ccentro_salud.h"
-#include <vector>
-#include <string>
-#include <iostream>
-#include <sstream>
 
 using namespace std;
 
@@ -14,11 +9,12 @@ class CBSA
 public:
 	CBSA(vector<Ccentro_salud*> centros);
 	~CBSA();
-	void agregar_paciente(Cpaciente nuevo);
+	void agregar_paciente(Cpaciente* nuevo, string nombre_centro, string partido, string direccion);
 	void Buscar_espera();
 	void buscar_prioridad_receptor(string dni);
 	void imprimir();
 	string to_string();
 	void donaciones_provincia();
-};
+	friend ostream& operator<<(ostream& out, const CBSA& C);
 
+};

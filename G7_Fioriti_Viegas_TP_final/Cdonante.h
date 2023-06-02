@@ -12,5 +12,6 @@ public:
 	~Cdonante();
 	string to_string();
 	void imprimir();
+	
 };
 

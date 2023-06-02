@@ -12,5 +12,6 @@ public:
 	~Creceptor();
 	string to_string();
 	void imprimir();
+	estados get_estado();
 };
 

@@ -24,3 +24,9 @@ void Creceptor::imprimir()
 {
 	cout << this->to_string() << endl;
 }
+
+
+estados Creceptor::get_estado()
+{
+	return this->estado;
+}
