@@ -14,3 +14,18 @@ Cpaciente::~Cpaciente()
 {
 }
 
+Cfluido* Cpaciente::get_sangre()
+{
+	return this->sangre;
+}
+
+Cfluido* Cpaciente::get_medula()
+{
+	return this->medula;
+}
+
+Cfluido* Cpaciente::get_plasma()
+{
+	return this->plasma;
+}
+

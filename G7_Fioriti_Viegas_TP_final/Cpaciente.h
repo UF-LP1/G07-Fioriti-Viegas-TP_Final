@@ -23,5 +23,8 @@ public:
 	~Cpaciente();
 	virtual string to_string() = 0;
 	virtual void imprimir() = 0;
+	Cfluido* get_sangre();
+	Cfluido* get_medula();
+	Cfluido* get_plasma();
 };
 
