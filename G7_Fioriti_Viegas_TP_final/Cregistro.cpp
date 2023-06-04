@@ -1,10 +1,11 @@
 #include "Cregistro.h"
 
-Cregistro::Cregistro(time_t fecha_extraccion, unsigned int volumen, Cdonante* donante)
+Cregistro::Cregistro(time_t fecha_extraccion, unsigned int volumen, Cdonante* donante, Cfluido* fluido)
 {
 	this->donante = donante;
 	this->fecha_extraccion = fecha_extraccion;
 	this->volumen = volumen;
+	this->fluido = fluido;
 }
 
 Cregistro::~Cregistro()
@@ -22,6 +23,25 @@ string Cregistro::to_string()
 void Cregistro::imprimir()
 {
 	cout << this->to_string() << endl;
+}
+
+bool Cregistro::VerificarFechaMax()
+{
+	bool caducado = true;
+	Csangre* sangre = dynamic_cast<Csangre*>(this->fluido);
+	if (sangre != nullptr) 
+		caducado = sangre->VerificarFechaMaxima();
+	Cplasma* plasma = dynamic_cast<Cplasma*>(this->fluido);
+	if (plasma != nullptr)
+		caducado = plasma->VerificarFechaMaxima();
+	Cmedula* medula = dynamic_cast<Cmedula*>(this->fluido);
+	if (medula != nullptr)
+		caducado = medula->VerificarFechaMaxima();
+	delete sangre;
+	delete plasma;
+	delete medula;
+	return caducado;
+	return false;
 }
 
 ostream& operator<<(ostream& out, Cregistro& C)
