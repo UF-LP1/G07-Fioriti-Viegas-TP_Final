@@ -1,7 +1,8 @@
 #include "Cplasma.h"
 
 
-Cplasma::Cplasma():Cfluido(42){//usar static
+Cplasma::Cplasma(){//usar static
+	caducidad = 365;
 }
 
 Cplasma::~Cplasma()
@@ -17,7 +18,7 @@ bool Cplasma::VerificarFechaMaxima(time_t extraccion)
 	double diferenciaSegundos = difftime(tiempo_actual, extraccion); // la funcion difftime calcula la diferencia entre dos fechas time_t y devuelve EN SEGUNDOS. 
 	int diferenciaDias = static_cast<int>(diferenciaSegundos / (24 * 60 * 60)); // convierto la diferencia a dias
 
-	if (diferenciaDias <= this->caducidad)
+	if (diferenciaDias <= caducidad)
 		vencio = false;
 	else
 		vencio = true;

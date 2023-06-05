@@ -1,8 +1,7 @@
 #include "Cfluido.h"
 
-Cfluido::Cfluido(unsigned int caducidad)
+Cfluido::Cfluido()
 {
-	this->caducidad = caducidad;
 }
 
 Cfluido::~Cfluido()

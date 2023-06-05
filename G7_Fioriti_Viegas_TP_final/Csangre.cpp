@@ -1,7 +1,8 @@
 #include "Csangre.h"
 
-Csangre::Csangre(tipo_sangre tipo, char Rh):Cfluido(1)
+Csangre::Csangre(tipo_sangre tipo, char Rh)
 {
+	caducidad = 42;
 	this->Rh = Rh;
 	this->tipo = tipo;
 }
@@ -31,7 +32,7 @@ bool Csangre::VerificarFechaMaxima(time_t extraccion)
 	double diferenciaSegundos = difftime(tiempo_actual, extraccion); // la funcion difftime calcula la diferencia entre dos fechas time_t y devuelve EN SEGUNDOS. 
 	int diferenciaDias = static_cast<int>(diferenciaSegundos / (24 * 60 * 60)); // convierto la diferencia a dias
 
-	if (diferenciaDias <= this->caducidad)
+	if (diferenciaDias <= caducidad)
 		vencio = false;
 	else
 		vencio = true;
