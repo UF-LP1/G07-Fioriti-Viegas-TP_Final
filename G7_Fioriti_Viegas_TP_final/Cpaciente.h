@@ -26,5 +26,6 @@ public:
 	Cfluido* get_sangre();
 	Cfluido* get_medula();
 	Cfluido* get_plasma();
+	string get_dni();
 };
 

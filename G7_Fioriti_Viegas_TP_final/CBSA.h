@@ -9,12 +9,12 @@ class CBSA
 public:
 	CBSA(vector<Ccentro_salud*> centros);
 	~CBSA();
-	void agregar_paciente(Cpaciente* nuevo, string nombre_centro, string partido, string direccion);
 	void Buscar_espera();
 	unsigned int buscar_prioridad_receptor(string dni);
 	void imprimir();
 	string to_string();
 	void donaciones_provincia();
 	friend ostream& operator<<(ostream& out, const CBSA& C);
-
+	friend vector<Ccentro_salud*> operator+(vector<Ccentro_salud*>& lista, Ccentro_salud& C);
+	friend vector<Ccentro_salud*> operator-(vector<Ccentro_salud*>&lista, Ccentro_salud& C);
 };

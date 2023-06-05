@@ -29,3 +29,8 @@ Cfluido* Cpaciente::get_plasma()
 	return this->plasma;
 }
 
+string Cpaciente::get_dni()
+{
+	return this->dni;
+}
+

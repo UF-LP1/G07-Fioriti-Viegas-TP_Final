@@ -27,5 +27,7 @@ public:
 	string get_partido();
 	vector<Cpaciente*> get_lista();
 	friend ostream& operator<<(ostream& out, Ccentro_salud& C);
+	friend vector<Cpaciente*> operator+(vector<Cpaciente*>& lista, Cpaciente& C);
+	friend vector<Cpaciente*> operator-(vector<Cpaciente*>& lista, Cpaciente& C);
 };
 

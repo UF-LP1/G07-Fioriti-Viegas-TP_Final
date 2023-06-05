@@ -57,3 +57,31 @@ ostream& operator<<(ostream& out, Ccentro_salud& C)
 	out << C.to_string() << endl;
 	return out;
 }
+
+vector<Cpaciente*> operator+(vector<Cpaciente*>& lista, Cpaciente& C)
+{
+	bool repetido = false;
+	for (int i = 0; i < lista.size(); i++) {
+		if (lista[i] == &C) {
+			repetido = true;
+			cout << "El paciente ya se encuentra en la lista." << endl;
+			break;
+		}
+	}
+	if(repetido == false)
+		lista.push_back(&C);
+	return lista;
+}
+
+vector<Cpaciente*> operator-(vector<Cpaciente*>& lista, Cpaciente& C)
+{
+	int largo = lista.size();
+	for (int i = 0; i < largo; i++)
+		if (lista[i]->get_dni() == C.get_dni()) {
+			lista.erase(lista.begin() + i);
+			break;
+		}
+	if (lista.size() == largo)
+		cout << "No se encontro el paciente que se quiere eliminar" << endl;
+	return lista;
+}
