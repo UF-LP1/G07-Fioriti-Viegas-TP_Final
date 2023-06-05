@@ -13,7 +13,7 @@ protected:
 public:
 	Cfluido(unsigned int caducidad);
 	~Cfluido();
-	virtual bool VerificarFechaMaxima() = 0;
+	virtual bool VerificarFechaMaxima(time_t extraccion) = 0;
 	virtual string to_string() = 0;
 	virtual void imprimir() = 0;
 };

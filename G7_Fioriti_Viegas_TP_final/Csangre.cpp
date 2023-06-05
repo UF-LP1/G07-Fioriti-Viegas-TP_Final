@@ -13,8 +13,7 @@ Csangre::~Csangre()
 string Csangre::to_string()
 {
 	stringstream salida;
-	tm* fecha = localtime(&this->caducidad);
-	salida << "Caracteristicas de la sangre: " << endl << this->tipo << this->Rh << endl << "Caducidad: " << fecha->tm_mday << "/" << fecha->tm_mon + 1 << "/" << fecha->tm_year + 1900 << endl;
+	salida << "Caracteristicas de la sangre: " << endl << this->tipo << this->Rh << endl;
 	return salida.str();
 }
 
@@ -23,19 +22,19 @@ void Csangre::imprimir()
 	cout << this->to_string() << endl;
 }
 
-bool Csangre::VerificarFechaMaxima()
+bool Csangre::VerificarFechaMaxima(time_t extraccion)
 {
 	bool vencio = true;
-	time_t now = time(NULL);
-	tm* fecha = localtime(&now);
-	tm* vencimiento = localtime(&this->caducidad);
-	if (fecha->tm_year <= vencimiento->tm_year)
-		vencio = false;
-	else if (fecha->tm_mon <= vencimiento->tm_mon)
-		vencio = false;
-	else if (fecha->tm_mday <= vencimiento->tm_mday)
-		vencio = false;
+	time_t tiempo_actual = time(nullptr); // obtengo el tiempo actual.
+	tm* fechaActual = localtime(&tiempo_actual);
+	struct tm* FECHA = localtime(&extraccion); // convierto la variable time_t a una estructura (tm) usando localtime para obtener dia,mes y anio. 
+	double diferenciaSegundos = difftime(tiempo_actual, extraccion); // la funcion difftime calcula la diferencia entre dos fechas time_t y devuelve EN SEGUNDOS. 
+	int diferenciaDias = static_cast<int>(diferenciaSegundos / (24 * 60 * 60)); // convierto la diferencia a dias
 
+	if (diferenciaDias <= this->caducidad)
+		vencio = false;
+	else
+		vencio = true;
 	return vencio;
 }
 

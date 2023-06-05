@@ -11,7 +11,7 @@ public:
 	~Csangre();
 	string to_string();
 	void imprimir();
-	bool VerificarFechaMaxima();
+	bool VerificarFechaMaxima(time_t extraccion);
 	friend ostream& operator<<(ostream& out, Csangre& C);
 };
 

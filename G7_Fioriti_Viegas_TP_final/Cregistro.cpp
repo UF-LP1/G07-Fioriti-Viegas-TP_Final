@@ -30,18 +30,18 @@ bool Cregistro::VerificarFechaMax()
 	bool caducado = true;
 	Csangre* sangre = dynamic_cast<Csangre*>(this->fluido);
 	if (sangre != nullptr) 
-		caducado = sangre->VerificarFechaMaxima();
+		caducado = sangre->VerificarFechaMaxima(this->fecha_extraccion);
 	Cplasma* plasma = dynamic_cast<Cplasma*>(this->fluido);
 	if (plasma != nullptr)
-		caducado = plasma->VerificarFechaMaxima();
+		caducado = plasma->VerificarFechaMaxima(this->fecha_extraccion);
 	Cmedula* medula = dynamic_cast<Cmedula*>(this->fluido);
 	if (medula != nullptr)
-		caducado = medula->VerificarFechaMaxima();
+		caducado = medula->VerificarFechaMaxima(this->fecha_extraccion);
 	delete sangre;
 	delete plasma;
 	delete medula;
+
 	return caducado;
-	return false;
 }
 
 ostream& operator<<(ostream& out, Cregistro& C)

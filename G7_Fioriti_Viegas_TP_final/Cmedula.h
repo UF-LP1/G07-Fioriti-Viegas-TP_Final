@@ -6,6 +6,7 @@ class Cmedula: public Cfluido
 public:
 	Cmedula();
 	~Cmedula();
-	bool VerificarFechaMaxima();
+	bool VerificarFechaMaxima(time_t extraccion);
+	string to_string();
 };
 
