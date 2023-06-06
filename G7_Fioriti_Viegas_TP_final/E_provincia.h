@@ -1,1 +1,2 @@
 #pragma once
+enum provincias { Jujuy, Salta, Formosa, Tucuman, Misiones, San_Luis, San_Juan, Mendoza, Cordoba, Corrientes, Entre_Rios, BsAs, CABA, Neuquen, La_Pampa, Santa_Cruz, Chubut, Tierra_del_Fuego, La_Rioja, Chaco, Santa_Fe, Catamarca, Rio_Negro, Santiago_del_Estero};
