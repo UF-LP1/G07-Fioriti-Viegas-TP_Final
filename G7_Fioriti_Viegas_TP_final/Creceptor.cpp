@@ -44,6 +44,16 @@ void Creceptor::imprimir()
 	cout << this->to_string() << endl;
 }
 
+bool Creceptor::verificar_trasfusion(char Rh, tipo_sangre tipo)
+{
+	bool compatible;
+	Csangre* sangre = dynamic_cast<Csangre*>(this->get_sangre());
+	if (sangre->get_Rh() != Rh)
+		compatible = false;
+	if(sangre->get_tipo() == )
+	return false;
+}
+
 
 estados Creceptor::get_estado()
 {

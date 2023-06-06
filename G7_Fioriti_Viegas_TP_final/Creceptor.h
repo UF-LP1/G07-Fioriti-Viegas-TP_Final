@@ -12,6 +12,7 @@ public:
 	~Creceptor();
 	string to_string();
 	void imprimir();
+	bool verificar_trasfusion(char Rh, tipo_sangre tipo);
 	estados get_estado();
 	string get_dni();
 	unsigned int get_prioridad();

@@ -85,3 +85,13 @@ vector<Cpaciente*> operator-(vector<Cpaciente*>& lista, Cpaciente& C)
 		cout << "No se encontro el paciente que se quiere eliminar" << endl;
 	return lista;
 }
+
+bool operator==(Creceptor& Cr , Cdonante& Cd)
+{
+	bool compatible = false;
+	if (Cr.get_estado() != 2) {
+		Csangre* sangre = dynamic_cast<Csangre*>(Cd.get_sangre());
+		compatible = Cr.verificar_trasfusion(sangre->get_Rh(), sangre->get_tipo());
+	}
+	return compatible;
+}

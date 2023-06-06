@@ -39,6 +39,16 @@ bool Csangre::VerificarFechaMaxima(time_t extraccion)
 	return vencio;
 }
 
+char Csangre::get_Rh()
+{
+	return this->Rh;
+}
+
+tipo_sangre Csangre::get_tipo()
+{
+	return this->tipo;
+}
+
 ostream& operator<<(ostream& out, Csangre& C)
 {
 	out << C.to_string() << endl;

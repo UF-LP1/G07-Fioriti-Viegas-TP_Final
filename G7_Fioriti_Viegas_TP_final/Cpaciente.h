@@ -3,7 +3,8 @@
 #include <string>
 #include <sstream>
 #include "Cfluido.h"
-
+#include "Csangre.h"
+#include "tipo_sangre.h"
 using namespace std;
 
 class Cpaciente

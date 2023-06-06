@@ -12,6 +12,8 @@ public:
 	string to_string();
 	void imprimir();
 	bool VerificarFechaMaxima(time_t extraccion);
+	char get_Rh();
+	tipo_sangre get_tipo();
 	friend ostream& operator<<(ostream& out, Csangre& C);
 };
 

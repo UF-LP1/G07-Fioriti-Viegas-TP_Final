@@ -29,5 +29,6 @@ public:
 	friend ostream& operator<<(ostream& out, Ccentro_salud& C);
 	friend vector<Cpaciente*> operator+(vector<Cpaciente*>& lista, Cpaciente& C);
 	friend vector<Cpaciente*> operator-(vector<Cpaciente*>& lista, Cpaciente& C);
+	friend bool operator==(vector<Cpaciente*>& lista, Cpaciente& C);
 };
 
