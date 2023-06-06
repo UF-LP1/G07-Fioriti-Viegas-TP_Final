@@ -1,9 +1,28 @@
 #include "Creceptor.h"
 
-Creceptor::Creceptor(time_t fecha_ingreso, unsigned int prioridad, estados estado, string nombre, string apellido, string telefono, string dni, char sexo, time_t fecha):Cpaciente(nombre,apellido,fecha,sexo,telefono,dni)
+Creceptor::Creceptor(time_t fecha_ingreso, estados estado, string nombre, string apellido, string telefono, string dni, char sexo, time_t fecha):Cpaciente(nombre,apellido,fecha,sexo,telefono,dni)
 {
+	unsigned int acum = 0;
+	time_t diferencia;
+	int semanas;
+	time_t now = time(NULL);
 	this->fecha_ingreso = fecha_ingreso;
-	this->prioridad = prioridad;
+	if (estado == 2)
+		acum = 0;
+	else if (estado == 0) {
+		acum++;
+		diferencia = difftime(fecha_ingreso, now);
+		semanas = (int)diferencia / (60 * 60 * 24 * 7);
+		if (semanas >= 1 && semanas < 3)
+			acum++;
+		else if (semanas < 6 && semanas >= 3)
+			acum += 2;
+		else if(semanas >= 6)
+			acum += 3;
+	}
+	else
+		acum = 5;
+	this->prioridad = acum;
 	this->estado = estado;
 }
 

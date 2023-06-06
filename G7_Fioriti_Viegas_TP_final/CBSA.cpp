@@ -11,7 +11,7 @@ CBSA::~CBSA()
 
 void CBSA::Buscar_espera()
 {
-	bool ninguno;
+	bool ninguno = true;
 	for (int i = 0; i != this->centros.size(); i++) {
 		for (int j = 0; i != this->centros[i]->get_lista().size(); i++) {
 			ninguno = true;
@@ -64,6 +64,7 @@ string CBSA::to_string()
 
 void CBSA::donaciones_provincia()
 {
+
 }
 
 ostream& operator<<(ostream& out, CBSA& C)
