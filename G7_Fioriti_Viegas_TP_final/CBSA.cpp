@@ -64,7 +64,9 @@ string CBSA::to_string()
 
 void CBSA::donaciones_provincia()
 {
+	for (int i = 0; i < this->centros.size(); i++) {
 
+	}
 }
 
 ostream& operator<<(ostream& out, CBSA& C)

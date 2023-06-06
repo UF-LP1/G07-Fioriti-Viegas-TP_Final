@@ -6,6 +6,7 @@
 #include "Cdonante.h"
 #include "Creceptor.h"
 #include "Cregistro.h"
+#include "E_provincia.h"
 
 using namespace std;
 
@@ -15,10 +16,10 @@ class Ccentro_salud
 	string nombre;
 	string direccion;
 	string partido;
-	string provincia;
+	provincias provincia;
 	string telefono;
 public:
-	Ccentro_salud(string nombre, string direccion, string partido, string provincia, string telefono);
+	Ccentro_salud(string nombre, string direccion, string partido, provincias provincia, string telefono);
 	~Ccentro_salud();
 	void imprimir();
 	string to_string();

@@ -138,6 +138,7 @@
     <ClInclude Include="Cregistro.h" />
     <ClInclude Include="Csangre.h" />
     <ClInclude Include="Eestados.h" />
+    <ClInclude Include="E_provincia.h" />
     <ClInclude Include="tipo_sangre.h" />
   </ItemGroup>
   <ItemGroup>
