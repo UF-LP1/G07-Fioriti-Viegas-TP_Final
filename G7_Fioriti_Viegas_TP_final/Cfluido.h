@@ -9,7 +9,7 @@ using namespace std;
 class Cfluido
 {
 protected:
-	static unsigned int caducidad;
+	unsigned int caducidad;
 public:
 	Cfluido();
 	~Cfluido();

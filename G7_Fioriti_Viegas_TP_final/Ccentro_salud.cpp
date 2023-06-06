@@ -47,6 +47,11 @@ string Ccentro_salud::get_partido()
 	return this->partido;
 }
 
+provincias Ccentro_salud::get_provincia()
+{
+	return this->provincia;
+}
+
 vector<Cpaciente*> Ccentro_salud::get_lista()
 {
 	return this->pacientes;

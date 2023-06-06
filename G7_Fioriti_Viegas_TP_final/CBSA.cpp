@@ -64,8 +64,29 @@ string CBSA::to_string()
 
 void CBSA::donaciones_provincia()
 {
-	for (int i = 0; i < this->centros.size(); i++) {
-
+	int acumCABA = 0, acumBsAs = 0, acumMendoza = 0, acumSanLuis = 0, acumSantaFe = 0, acumSanJuan = 0, acumSantiago = 0, acumNeuquen = 0, acumLaPampa = 0, acumLaRioja = 0, acumCatamarca = 0,
+		acumRioNegro = 0, acumChubut = 0, acumTierraDelFuego = 0, acumCordoba = 0, acumEntreRios = 0, acumCorrientes = 0, acumMisiones = 0, acumTucuman = 0, acumJujuy = 0, acumSalta = 0,
+		acumFormosa = 0, acumSantCruz = 0, acumChaco = 0;
+	time_t fecha;
+	for (int h = 0; h < 12; h++) {
+		cout << "Mes " << h + 1 << endl;
+		for (int t = 0; t < 24; t++) {
+			for (int i = 0; i < this->centros.size(); i++) {
+				for (int j = 0; j < this->centros[i]->get_lista().size(); j++) {
+					Cdonante* donante = dynamic_cast<Cdonante*>(this->centros[i]->get_lista()[j]);
+					if (donante != nullptr) {
+						
+					}
+				}
+			}
+			cout << "Donantes en ";
+			if (t == 0)
+				cout << "Jujuy: " << endl;
+			else if (t == 1)
+				cout << "Salta: " << endl;
+			else if (t == 2)
+				cout << "Formosa: " << endl;
+		}
 	}
 }
 

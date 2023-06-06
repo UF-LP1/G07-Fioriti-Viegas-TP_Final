@@ -26,6 +26,7 @@ public:
 	string get_nombre();
 	string get_direccion();
 	string get_partido();
+	provincias get_provincia();
 	vector<Cpaciente*> get_lista();
 	friend ostream& operator<<(ostream& out, Ccentro_salud& C);
 	friend vector<Cpaciente*> operator+(vector<Cpaciente*>& lista, Cpaciente& C);
