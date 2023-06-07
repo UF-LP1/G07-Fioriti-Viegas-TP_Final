@@ -66,9 +66,10 @@ void CBSA::donaciones_provincia()
 {
 	int acumCABA, acumBsAs, acumMendoza, acumSanLuis, acumSantaFe, acumSanJuan, acumSantiago, acumNeuquen, acumLaPampa, acumLaRioja, acumCatamarca,acumRioNegro, acumChubut, acumTierraDelFuego,
 		acumCordoba, acumEntreRios, acumCorrientes, acumMisiones, acumTucuman, acumJujuy, acumSalta, acumFormosa, acumSantCruz, acumChaco;
-	tm* recibio;
+	tm* recibio = new tm;
 	time_t now = time(NULL);
-	tm* ahora = localtime(&now);
+	tm* ahora = new tm;
+	ahora = localtime(&now);
 	for (int h = 0; h < ahora->tm_mon + 1; h++) {
 		cout << "Mes " << h + 1 << endl;
 		acumCABA = 0;
@@ -150,6 +151,7 @@ void CBSA::donaciones_provincia()
 					else if (p == 23)
 						acumSantiago++;
 				}
+				delete receptor;
 			}
 		}
 		cout << "Donantes en: " << endl;
@@ -181,6 +183,16 @@ void CBSA::donaciones_provincia()
 	delete ahora;
 	delete recibio;
 }
+
+void CBSA::agregar_donante(Cdonante donante, Ccentro_salud centro)
+{
+	if(donante.get_edad() <= 65 && donante.get_edad() >= 18 && donante.get_enfermedades() == false && donante.get_meses() == false && donante.get_peso() >= 50)
+		for (int i = 0; i < this->centros.size(); i++) {
+			this->centros[i]->get_lista() + donante;
+		}
+		
+}
+
 
 ostream& operator<<(ostream& out, CBSA& C)
 {

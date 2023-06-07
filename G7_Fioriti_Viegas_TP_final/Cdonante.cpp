@@ -12,6 +12,26 @@ Cdonante::~Cdonante()
 {
 }
 
+unsigned int Cdonante::get_edad()
+{
+	return this->edad;
+}
+
+float Cdonante::get_peso()
+{
+	return this->peso;
+}
+
+bool Cdonante::get_enfermedades()
+{
+	return this->enfermedades;
+}
+
+bool Cdonante::get_meses()
+{
+	return this->meses;
+}
+
 string Cdonante::to_string()
 {
 	stringstream salida;

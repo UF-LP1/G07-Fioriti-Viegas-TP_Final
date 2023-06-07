@@ -32,5 +32,6 @@ public:
 	friend vector<Cpaciente*> operator+(vector<Cpaciente*>& lista, Cpaciente& C);
 	friend vector<Cpaciente*> operator-(vector<Cpaciente*>& lista, Cpaciente& C);
 	friend bool operator==(Creceptor& Cr, Cdonante& Cd);
+	friend bool operator!=(Creceptor& Cr, Cdonante& Cd);
 };
 
