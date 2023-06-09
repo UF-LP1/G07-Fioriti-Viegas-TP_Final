@@ -49,11 +49,63 @@ bool Creceptor::verificar_trasfusion(char Rh, tipo_sangre tipo)
 {
 	bool compatible;
 	Csangre* sangre = dynamic_cast<Csangre*>(this->get_sangre());
-	if (sangre->get_Rh() != Rh)
-		compatible = false;
-	if(sangre->get_tipo() == A)
-
-	return false;
+	switch (tipo)
+	{
+	case A:
+		if (Rh == '+') {
+			if (sangre->get_tipo() == A && sangre->get_Rh() == '+' || sangre->get_tipo() == AB && sangre->get_Rh() == '+') // A+ dona a A+ y AB+
+				compatible = true;
+			else
+				compatible = false;
+		}
+		else if (Rh == '-') {
+			if (sangre->get_tipo() == A && sangre->get_Rh() == '+' || sangre->get_tipo() == AB && sangre->get_Rh() == '+' || sangre->get_tipo() == A && sangre->get_Rh() == '-' || sangre->get_tipo() == AB && sangre->get_Rh() == '-') // A- dona a A+ A- AB+ AB-
+				compatible = true;
+			else
+				compatible = false;
+		}
+		break;
+	case B:
+		if (Rh == '+') {
+			if (sangre->get_tipo() == B && sangre->get_Rh() == '+' || sangre->get_tipo() == AB && sangre->get_Rh() == '+') // B+ dona a B+ y AB+
+				compatible = true;
+			else
+				compatible = false;
+		}
+		else if (Rh == '-') {
+			if (sangre->get_tipo() == B && sangre->get_Rh() == '+' || sangre->get_tipo() == AB && sangre->get_Rh() == '+' || sangre->get_tipo() == B && sangre->get_Rh() == '-' || sangre->get_tipo() == AB && sangre->get_Rh() == '-') // B- dona a B+ B- AB+ y AB- 
+				compatible = true;
+			else
+				compatible = false;
+		}
+		break;
+	case AB:
+		if (Rh == '+') {
+			if (sangre->get_tipo() == AB && sangre->get_Rh() == '+') // AB+ dona a AB+ 
+				compatible = true;
+			else
+				compatible = false;
+		}
+		else if (Rh == '-') {
+			if (sangre->get_tipo() == AB && sangre->get_Rh() == '+' || sangre->get_tipo() == AB && sangre->get_Rh() == '-') // AB- dona a AB+ y AB-
+				compatible = true;
+			else
+				compatible = false;
+		}
+		break;
+	case O:
+		if (Rh == '+') {
+			if (sangre->get_tipo() == A && sangre->get_Rh() == '+' || sangre->get_tipo() == B && sangre->get_Rh() == '+' || sangre->get_tipo() == AB && sangre->get_Rh() == '+' || sangre->get_tipo() == O && sangre->get_Rh() == '+') // O+ dona a A+ B+ AB+ y O+
+				compatible = true;
+			else
+				compatible = false;
+		}
+		else if (Rh == '-') {
+			compatible = true; // O+ es dador universal 
+		}
+		break;
+	}
+	return compatible;
 }
 
 
