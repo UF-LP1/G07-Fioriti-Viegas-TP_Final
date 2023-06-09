@@ -26,6 +26,10 @@ int main() {
 	centros_salud.push_back(&jujuy);
 	centros_salud.push_back(&santiagoDelEstero);
 	centros_salud.push_back(&RioNegro);
+	Cdonante delfi(19, 60, false, false, "delfina", "Hanish", "23726575889", 'f', "45474635", 1078066714);
+	Creceptor mate(1685631856, 0, inestable, "mateo", "espejo", "82346546325", "45522914", 'm', 1073055965);
+	Cdonante fede(19, 90, false, false, "federico", "fioriti", "2364346284", 'm', "45428877", 1072451751);
+	Creceptor inia()
 
 	CBSA BSA(centros_salud);
 }

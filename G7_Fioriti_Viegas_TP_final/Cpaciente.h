@@ -2,7 +2,8 @@
 #include <ctime>
 #include <string>
 #include <sstream>
-#include "Cfluido.h"
+#include "Cmedula.h"
+#include "Cplasma.h"
 #include "Csangre.h"
 #include "tipo_sangre.h"
 using namespace std;
