@@ -15,6 +15,7 @@ int main() {
 	Ccentro_salud RioNegro("Hospital Favaloro", "necochea_163", "CABA", Rio_Negro, "89726345323");
 
 	vector<Ccentro_salud*> centros_salud;
+	&centros_salud + &Favaloro;
 	centros_salud.push_back(&Favaloro);
 	centros_salud.push_back(&mendoza);
 	centros_salud.push_back(&BsAs);

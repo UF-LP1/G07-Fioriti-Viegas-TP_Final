@@ -184,11 +184,13 @@ void CBSA::donaciones_provincia()
 	delete recibio;
 }
 
-void CBSA::agregar_donante(Cdonante donante, Ccentro_salud centro)
+void CBSA::agregar_donante(Cpaciente& paciente, Ccentro_salud& centro)
 {
-	if(donante.get_edad() <= 65 && donante.get_edad() >= 18 && donante.get_enfermedades() == false && donante.get_meses() == false && donante.get_peso() >= 50)
+	Cdonante* donante = dynamic_cast<Cdonante*>(&paciente);
+	if((*donante).get_edad() <= 65 && (*donante).get_edad() >= 18 && (*donante).get_enfermedades() == false && (*donante).get_meses() == false && (*donante).get_peso() >= 50)
 		for (int i = 0; i < this->centros.size(); i++) {
-			this->centros[i]->get_lista() + donante;
+			if (this->centros[i] == &centro)
+				this->centros[i].agregar_paciente(paciente);
 		}
 		
 }

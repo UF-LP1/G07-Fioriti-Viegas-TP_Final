@@ -28,6 +28,7 @@ public:
 	string get_partido();
 	provincias get_provincia();
 	vector<Cpaciente*> get_lista();
+	void agregar_paciente(Cpaciente& paciente);
 	friend ostream& operator<<(ostream& out, Ccentro_salud& C);
 	friend vector<Cpaciente*> operator+(vector<Cpaciente*>& lista, Cpaciente& C);
 	friend vector<Cpaciente*> operator-(vector<Cpaciente*>& lista, Cpaciente& C);
