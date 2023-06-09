@@ -189,10 +189,20 @@ void CBSA::agregar_donante(Cpaciente& paciente, Ccentro_salud& centro)
 	Cdonante* donante = dynamic_cast<Cdonante*>(&paciente);
 	if((*donante).get_edad() <= 65 && (*donante).get_edad() >= 18 && (*donante).get_enfermedades() == false && (*donante).get_meses() == false && (*donante).get_peso() >= 50)
 		for (int i = 0; i < this->centros.size(); i++) {
-			if (this->centros[i] == &centro)
-				this->centros[i].agregar_paciente(paciente);
+			if (this->centros[i] == &centro) {
+				this->centros[i]->agregar_paciente(paciente);
+				break;
+			}
 		}
 		
+}
+
+void CBSA::agregar_receptor(Cpaciente& receptor, Ccentro_salud& centro)
+{
+	for (int i = 0; i < this->centros.size(); i++) {
+		if (this->centros[i] == &centro)
+			this->centros[i]->agregar_paciente(receptor);
+	}
 }
 
 
