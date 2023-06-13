@@ -14,6 +14,7 @@ public:
 	void imprimir();
 	string to_string();
 	void donaciones_provincia();
+	void eliminarPaciente(Cpaciente& P);
 	void agregar_donante(Cpaciente& donante, Ccentro_salud &centro);
 	void agregar_receptor(Cpaciente& receptor, Ccentro_salud &centro);
 	friend ostream& operator<<(ostream& out, const CBSA& C);

@@ -28,6 +28,7 @@ public:
 	provincias get_provincia();
 	vector<Cpaciente*> get_lista();
 	void agregar_paciente(Cpaciente& paciente);
+	void eliminarPa(Cpaciente& paciente);
 	friend ostream& operator<<(ostream& out, Ccentro_salud& C);
 };
 vector<Cpaciente*> operator+(vector<Cpaciente*>& lista, Cpaciente& C);

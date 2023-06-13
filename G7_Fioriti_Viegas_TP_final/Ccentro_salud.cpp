@@ -25,8 +25,10 @@ string Ccentro_salud::to_string()
 		<< "Partido: " << this->partido << endl <<"Provincia: " << this->provincia << endl <<
 		"Telefono: " << this->telefono << endl;
 	salida << "Pacientes del centro de salud: " << endl;
-	for (int i = 0; i < this->pacientes.size(); i++) {
+	int i = 0;
+	while(i != this->pacientes.size()) {
 		salida << this->pacientes[i]->to_string() << endl;
+		i++;
 	}
 	salida << endl;
 	return salida.str();
@@ -59,8 +61,12 @@ vector<Cpaciente*> Ccentro_salud::get_lista()
 
 void Ccentro_salud::agregar_paciente(Cpaciente& paciente)
 {
-	vector<Cpaciente*>* aux = &this->get_lista();
-	*aux + paciente;
+	this->pacientes + paciente;
+}
+
+void Ccentro_salud::eliminarPa(Cpaciente& P)
+{
+	this->pacientes - P;
 }
 
 ostream& operator<<(ostream& out, Ccentro_salud& C)
@@ -72,12 +78,14 @@ ostream& operator<<(ostream& out, Ccentro_salud& C)
 vector<Cpaciente*> operator+(vector<Cpaciente*>& lista, Cpaciente& C)
 {
 	bool repetido = false;
-	for (int i = 0; i < lista.size(); i++) {
+	int i = 0;
+	while(i < lista.size()) {
 		if (lista[i] == &C) {
 			repetido = true;
 			cout << "El paciente ya se encuentra en la lista." << endl;
 			break;
 		}
+		i++;
 	}
 	if(repetido == false)
 		lista.push_back(&C);
@@ -86,13 +94,15 @@ vector<Cpaciente*> operator+(vector<Cpaciente*>& lista, Cpaciente& C)
 
 vector<Cpaciente*> operator-(vector<Cpaciente*>& lista, Cpaciente& C)
 {
-	int largo = lista.size();
-	for (int i = 0; i < largo; i++)
+	int i = 0;
+	while (i < lista.size()) {
 		if (lista[i]->get_dni() == C.get_dni()) {
 			lista.erase(lista.begin() + i);
 			break;
 		}
-	if (lista.size() == largo)
+		i++;
+	}
+	if (lista.size() == i)
 		cout << "No se encontro el paciente que se quiere eliminar" << endl;
 	return lista;
 }

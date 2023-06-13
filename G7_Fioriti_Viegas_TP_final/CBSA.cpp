@@ -11,9 +11,10 @@ CBSA::~CBSA()
 
 void CBSA::Buscar_espera(/*string nombre, int provincia, string direccion*/)
 {
+	int i = 0, j = 0;
 	bool ninguno = true;
-	for (int i = 0; i != this->centros.size(); i++) {
-		for (int j = 0; i != this->centros[i]->get_lista().size(); i++) { //de lo contrario, if(this->centros[i]->get_nombre() == nombre && this->centros[i]->get_provincia() == provincia && this->centros[i]->get_direccion == direccion)
+	while(i != this->centros.size()) {
+		while(j != this->centros[i]->get_lista().size()) { //de lo contrario, if(this->centros[i]->get_nombre() == nombre && this->centros[i]->get_provincia() == provincia && this->centros[i]->get_direccion == direccion)
 			ninguno = true;
 			Creceptor* receptor = dynamic_cast<Creceptor*>(this->centros[i]->get_lista()[j]);
 			cout << "Centro de salud: " << this->centros[i]->get_nombre() << endl;
@@ -22,27 +23,27 @@ void CBSA::Buscar_espera(/*string nombre, int provincia, string direccion*/)
 					cout << receptor;
 					ninguno = false;
 				}
+			j++;
 		}
 		if (ninguno == true)
 			cout << "Ninguno." << endl;
+		i++;
 	}
 }
 
 unsigned int CBSA::buscar_prioridad_receptor(string dni) 
 {
-	bool encontrado = false;
-	for (int i = 0; i != this->centros.size(); i++) {
-		for (int j = 0; i != this->centros[i]->get_lista().size(); i++) {
+	int i = 0, j = 0;
+	while(i != this->centros.size()) {
+		while(j != this->centros[i]->get_lista().size()) {
 			Creceptor* receptor = dynamic_cast<Creceptor*>(this->centros[i]->get_lista()[j]);
-			if (receptor == nullptr)
+			if (receptor != nullptr)
 				if (receptor->get_dni() == dni) {
 					return receptor->get_prioridad();
-					encontrado = true;
-					break;
 				}
+			j++;
 		}
-		if (encontrado == true)
-			break;
+		i++;
 	}
 	return 0;
 }
@@ -55,9 +56,11 @@ void CBSA::imprimir()
 string CBSA::to_string()
 {
 	stringstream salida;
+	int i = 0;
 	salida << "Datos de los centros de salud: " << endl;
-	for (int i = 0; i != this->centros.size(); i++) {
+	while(i != this->centros.size()) {
 		salida << this->centros[i]->to_string();
+		i++;
 	}
 	return salida.str();
 }
@@ -70,7 +73,8 @@ void CBSA::donaciones_provincia()
 	time_t now = time(NULL);
 	tm* ahora = new tm;
 	ahora = localtime(&now);
-	for (int h = 0; h < ahora->tm_mon + 1; h++) {
+	int h = 0, i = 0, j = 0;
+	while(h < ahora->tm_mon + 1){
 		cout << "Mes " << h + 1 << endl;
 		acumCABA = 0;
 		acumBsAs = 0;
@@ -96,9 +100,9 @@ void CBSA::donaciones_provincia()
 		acumFormosa = 0;
 		acumSantCruz = 0;
 		acumChaco = 0;
-		for (int i = 0; i < this->centros.size(); i++) {
+		while(i < this->centros.size()) {
 			int p = this->centros[i]->get_provincia();
-			for (int j = 0; j < this->centros[i]->get_lista().size(); j++) {
+			while(j < this->centros[i]->get_lista().size()) {
 				Creceptor* receptor = dynamic_cast<Creceptor*>(this->centros[i]->get_lista()[j]);
 				recibio = localtime(receptor->get_recibio());
 				if (receptor != nullptr && receptor->get_estado() == 2 && recibio->tm_year == ahora->tm_year && recibio->tm_mon == h) { //solo va a dar las estadsticas de el anio actual
@@ -152,7 +156,9 @@ void CBSA::donaciones_provincia()
 						acumSantiago++;
 				}
 				delete receptor;
+				j++;
 			}
+			i++;
 		}
 		cout << "Donantes en: " << endl;
 		cout << "Jujuy: " << acumJujuy << endl;
@@ -184,24 +190,46 @@ void CBSA::donaciones_provincia()
 	delete recibio;
 }
 
+void CBSA::eliminarPaciente(Cpaciente& P)
+{
+	int i = 0;
+	int j = 0;
+	bool listo = false;
+	while(i < this->centros.size()) {
+		while(j < this->centros.size()) {
+			if (this->centros[i]->get_lista()[j] == &P) {
+				this->centros[i]->eliminarPa(P);
+				break;
+			}
+			j++;
+		}
+		if (listo == true)
+			break;
+		i++;
+	}
+}
+
 void CBSA::agregar_donante(Cpaciente& paciente, Ccentro_salud& centro)
 {
 	Cdonante* donante = dynamic_cast<Cdonante*>(&paciente);
+	int i = 0;
 	if((*donante).get_edad() <= 65 && (*donante).get_edad() >= 18 && (*donante).get_enfermedades() == false && (*donante).get_meses() == false && (*donante).get_peso() >= 50)
-		for (int i = 0; i < this->centros.size(); i++) {
+		while(i < this->centros.size()) {
 			if (this->centros[i] == &centro) {
 				this->centros[i]->agregar_paciente(paciente);
-				break;
 			}
+			i++;
 		}
 		
 }
 
 void CBSA::agregar_receptor(Cpaciente& receptor, Ccentro_salud& centro)
 {
-	for (int i = 0; i < this->centros.size(); i++) {
+	int i = 0;
+	while(i < this->centros.size()) {
 		if (this->centros[i] == &centro)
 			this->centros[i]->agregar_paciente(receptor);
+		i++;
 	}
 }
 
@@ -219,13 +247,14 @@ vector<Ccentro_salud*> operator+(vector<Ccentro_salud*>& lista, Ccentro_salud& C
 
 vector<Ccentro_salud*> operator-(vector<Ccentro_salud*>& lista, Ccentro_salud& C)
 {
-	int largo = lista.size();
-	for (int i = 0; i < largo; i++)
+	int i = 0;
+	while(i < lista.size())
 		if (lista[i]->get_direccion() == C.get_direccion() && lista[i]->get_nombre() == C.get_nombre() && lista[i]->get_partido() == C.get_partido()) {
 			lista.erase(lista.begin() + i);
 			break;
+			i++;
 		}
-	if (lista.size() == largo)
+	if (lista.size() == i)
 		cout << "No se encontro el centro de salud que se quiere eliminar" << endl;
 	return lista;
 }
