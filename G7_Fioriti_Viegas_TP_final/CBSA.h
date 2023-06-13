@@ -17,6 +17,6 @@ public:
 	void agregar_donante(Cpaciente& donante, Ccentro_salud &centro);
 	void agregar_receptor(Cpaciente& receptor, Ccentro_salud &centro);
 	friend ostream& operator<<(ostream& out, const CBSA& C);
-	friend vector<Ccentro_salud*> operator+(vector<Ccentro_salud*>& lista, Ccentro_salud& C);
-	friend vector<Ccentro_salud*> operator-(vector<Ccentro_salud*>&lista, Ccentro_salud& C);
 };
+vector<Ccentro_salud*> operator+(vector<Ccentro_salud*>& lista, Ccentro_salud& C);
+vector<Ccentro_salud*> operator-(vector<Ccentro_salud*>& lista, Ccentro_salud& C);

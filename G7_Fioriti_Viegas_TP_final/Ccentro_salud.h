@@ -29,9 +29,8 @@ public:
 	vector<Cpaciente*> get_lista();
 	void agregar_paciente(Cpaciente& paciente);
 	friend ostream& operator<<(ostream& out, Ccentro_salud& C);
-	friend vector<Cpaciente*> operator+(vector<Cpaciente*>& lista, Cpaciente& C);
-	friend vector<Cpaciente*> operator-(vector<Cpaciente*>& lista, Cpaciente& C);
-	friend bool operator==(Creceptor& Cr, Cdonante& Cd);
-	friend bool operator!=(Creceptor& Cr, Cdonante& Cd);
 };
-
+vector<Cpaciente*> operator+(vector<Cpaciente*>& lista, Cpaciente& C);
+vector<Cpaciente*> operator-(vector<Cpaciente*>& lista, Cpaciente& C);
+bool operator==(Creceptor& Cr, Cdonante& Cd);
+bool operator!=(Creceptor& Cr, Cdonante& Cd);

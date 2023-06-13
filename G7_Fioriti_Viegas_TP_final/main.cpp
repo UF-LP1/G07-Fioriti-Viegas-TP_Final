@@ -15,21 +15,22 @@ int main() {
 	Ccentro_salud RioNegro("Hospital Favaloro", "necochea_163", "CABA", Rio_Negro, "89726345323");
 
 	vector<Ccentro_salud*> centros_salud;
-	centros_salud.push_back(&Favaloro);
-	centros_salud.push_back(&mendoza);
-	centros_salud.push_back(&BsAs);
-	centros_salud.push_back(&chubut);
-	centros_salud.push_back(&sanJuan);
-	centros_salud.push_back(&sanLuis);
-	centros_salud.push_back(&cordoba);
-	centros_salud.push_back(&misiones);
-	centros_salud.push_back(&jujuy);
-	centros_salud.push_back(&santiagoDelEstero);
-	centros_salud.push_back(&RioNegro);
+	centros_salud + Favaloro;
+	centros_salud + mendoza;
+	centros_salud + BsAs;
+	centros_salud + chubut;
+	centros_salud + sanJuan;
+	centros_salud + sanLuis;
+	centros_salud + cordoba;
+	centros_salud + misiones;
+	centros_salud + jujuy;
+	centros_salud + santiagoDelEstero;
+	centros_salud + RioNegro;
+
 	Cdonante delfi(19, 60, false, false, "delfina", "Hanish", "23726575889", 'f', "45474635", 1078066714);
 	Creceptor mate(1685631856, 0, inestable, "mateo", "espejo", "82346546325", "45522914", 'm', 1073055965);
 	Cdonante fede(19, 90, false, false, "federico", "fioriti", "2364346284", 'm', "45428877", 1072451751);
-	Creceptor inia()
+	Creceptor inia();
 
 	CBSA BSA(centros_salud);
 }
