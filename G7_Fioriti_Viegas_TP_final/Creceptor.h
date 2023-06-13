@@ -9,6 +9,7 @@ class Creceptor: public Cpaciente
 	unsigned int prioridad;
 	estados estado;
 public:
+	Creceptor();
 	Creceptor(time_t fecha_ingreso,time_t* recibio, estados estado, string nombre, string apellido, string telefono, string dni, char sexo, time_t fecha);
 	~Creceptor();
 	string to_string();

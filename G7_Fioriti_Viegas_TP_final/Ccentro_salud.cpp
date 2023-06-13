@@ -59,6 +59,10 @@ vector<Cpaciente*> Ccentro_salud::get_lista()
 	return this->pacientes;
 }
 
+void Ccentro_salud::ordenarPaciente()
+{
+}
+
 void Ccentro_salud::agregar_paciente(Cpaciente& paciente)
 {
 	this->pacientes + paciente;

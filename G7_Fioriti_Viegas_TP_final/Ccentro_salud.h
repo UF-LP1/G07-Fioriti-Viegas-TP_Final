@@ -27,6 +27,7 @@ public:
 	string get_partido();
 	provincias get_provincia();
 	vector<Cpaciente*> get_lista();
+	void ordenarPaciente();
 	void agregar_paciente(Cpaciente& paciente);
 	void eliminarPa(Cpaciente& paciente);
 	friend ostream& operator<<(ostream& out, Ccentro_salud& C);

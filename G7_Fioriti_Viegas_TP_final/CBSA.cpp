@@ -65,6 +65,18 @@ string CBSA::to_string()
 	return salida.str();
 }
 
+void CBSA::empezar_tramite()
+{
+	int i = 0, j = 0;
+	Creceptor* receptor = new Creceptor();
+	while (i < this->centros.size()) {
+		while (j < this->centros[i]->get_lista().size()) {
+
+		}
+	}
+}
+
+
 void CBSA::donaciones_provincia()
 {
 	int acumCABA, acumBsAs, acumMendoza, acumSanLuis, acumSantaFe, acumSanJuan, acumSantiago, acumNeuquen, acumLaPampa, acumLaRioja, acumCatamarca,acumRioNegro, acumChubut, acumTierraDelFuego,

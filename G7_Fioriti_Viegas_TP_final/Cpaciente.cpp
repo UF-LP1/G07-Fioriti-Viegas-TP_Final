@@ -1,5 +1,9 @@
 #include "Cpaciente.h"
 
+Cpaciente::Cpaciente()
+{
+}
+
 Cpaciente::Cpaciente(string nombre, string apellido, time_t fecha, char sexo, string telefono, string dni)
 {
 	this->nombre = nombre;

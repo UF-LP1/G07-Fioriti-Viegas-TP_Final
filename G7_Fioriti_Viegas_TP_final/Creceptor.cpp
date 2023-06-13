@@ -1,5 +1,9 @@
 #include "Creceptor.h"
 
+Creceptor::Creceptor():Cpaciente()
+{
+}
+
 Creceptor::Creceptor(time_t fecha_ingreso, time_t* recibio, estados estado, string nombre, string apellido, string telefono, string dni, char sexo, time_t fecha):Cpaciente(nombre,apellido,fecha,sexo,telefono,dni)
 {
 	unsigned int acum = 0;
