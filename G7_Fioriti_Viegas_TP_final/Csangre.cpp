@@ -1,8 +1,7 @@
 #include "Csangre.h"
 
-Csangre::Csangre(tipo_sangre tipo, char Rh)
+Csangre::Csangre(tipo_sangre tipo, char Rh):Cfluido(42)
 {
-	this->caducidad = 42;
 	this->Rh = Rh;
 	this->tipo = tipo;
 }

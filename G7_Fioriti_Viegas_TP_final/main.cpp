@@ -2,6 +2,7 @@
 #include "CBSA.H"
 
 int main() {
+	Csangre sangre(A, '-');
 	Ccentro_salud Favaloro("Hospital Favaloro", "necochea_163", "CABA", CABA, "17262537832");
 	Ccentro_salud mendoza("Clinica Mendo", "necochea_163", "CABA", Mendoza, "73246638859");
 	Ccentro_salud BsAs("Hospital Favaloro", "necochea_163", "CABA", BsAs, "76834672372"); 

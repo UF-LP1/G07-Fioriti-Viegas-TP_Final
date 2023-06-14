@@ -1,8 +1,8 @@
 #include "Cplasma.h"
 
 
-Cplasma::Cplasma(){
-	this->caducidad = 365;
+Cplasma::Cplasma():Cfluido(365){
+
 }
 
 Cplasma::~Cplasma()

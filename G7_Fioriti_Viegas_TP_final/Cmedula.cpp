@@ -1,8 +1,7 @@
 #include "Cmedula.h"
 
-Cmedula::Cmedula()
+Cmedula::Cmedula():Cfluido(1)
 {
-	this->caducidad = 1;
 }
 
 Cmedula::~Cmedula()
