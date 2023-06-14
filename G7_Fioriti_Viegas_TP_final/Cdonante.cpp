@@ -1,6 +1,6 @@
 #include "Cdonante.h"
 
-Cdonante::Cdonante(unsigned int edad, float peso, bool enfermedades, bool meses, string nombre, string apellido, string telefono, char sexo, string dni, time_t fecha, vector<Cregistro*> registro, Cfluido& sangre, Cfluido& medula, Cfluido& plasma):Cpaciente(nombre,apellido,fecha,sexo,telefono,dni, sangre, plasma, medula)
+Cdonante::Cdonante(unsigned int edad, float peso, bool enfermedades, bool meses, string nombre, string apellido, string telefono, char sexo, string dni, time_t fecha, vector<Cregistro*> registro):Cpaciente(nombre,apellido,fecha,sexo,telefono,dni)
 {
 	this->registro = registro;
 	this->edad = edad;

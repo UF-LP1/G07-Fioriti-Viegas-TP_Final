@@ -15,6 +15,6 @@ public:
 	~Cfluido();
 	virtual bool VerificarFechaMaxima(time_t extraccion) = 0;
 	virtual string to_string() = 0;
-	virtual void imprimir() = 0;
+	virtual void imprimir();
 };
 

@@ -1,58 +1,135 @@
-
 #include "CBSA.H"
+#include "Cfluido.h"
+#include "Cpaciente.h"
+#include "Creceptor.h"
 
 int main() {
-	Csangre sangre(A, '-');
-	Ccentro_salud Favaloro("Hospital Favaloro", "necochea_163", "CABA", CABA, "17262537832");
-	Ccentro_salud mendoza("Clinica Mendo", "necochea_163", "CABA", Mendoza, "73246638859");
-	Ccentro_salud BsAs("Hospital Favaloro", "necochea_163", "CABA", BsAs, "76834672372"); 
-	Ccentro_salud chubut("Hospital Favaloro", "necochea_163", "CABA", Chubut, "87457867232"); 
-	Ccentro_salud sanJuan("Hospital Favaloro", "necochea_163", "CABA", San_Juan, "23432679732"); 
-	Ccentro_salud sanLuis("Hospital Favaloro", "necochea_163", "CABA", San_Luis, "78362875623"); 
-	Ccentro_salud cordoba("Hospital Favaloro", "necochea_163", "CABA", Cordoba, "87231566812"); 
-	Ccentro_salud misiones("Hospital Favaloro", "necochea_163", "CABA", Misiones, "87236426344"); 
-	Ccentro_salud jujuy("Hospital Favaloro", "necochea_163", "CABA", Jujuy, "87623486265"); 
-	Ccentro_salud santiagoDelEstero("Hospital Favaloro", "necochea_163", "CABA", Santiago_del_Estero, "12376736434"); 
-	Ccentro_salud RioNegro("Hospital Favaloro", "necochea_163", "CABA", Rio_Negro, "89726345323");
+	vector<Cpaciente*>pacientesFava;
+	vector<Cpaciente*>pacientesMendoza;
+	vector<Cpaciente*>pacientesBsAs;
+	vector<Cpaciente*>pacientesChubut;
+	vector<Cpaciente*>pacientesSanLuis;
+	Ccentro_salud Favaloro("Hospital Favaloro", "Entre Rios 2923", "CABA", CABA, "17262537832", pacientesFava);
+	Ccentro_salud mendoza("Clinica Mendo", "Cabral 871", "CABA", Mendoza, "73246638859", pacientesMendoza);
+	Ccentro_salud BsAs("Hospital Favaloro", "Avenida de Mayo 5213", "CABA", BsAs, "76834672372", pacientesBsAs);
+	Ccentro_salud chubut("Hospital Favaloro", "Carlos Gardel 366", "CABA", Chubut, "87457867232", pacientesChubut);
+	Ccentro_salud sanLuis("Hospital Favaloro", "Juan Labrada 821", "CABA", San_Luis, "78362875623", pacientesSanLuis);
+	/*
+		Ccentro_salud sanJuan("Hospital Favaloro", "necochea_163", "CABA", San_Juan, "23432679732");
+		Ccentro_salud cordoba("Hospital Favaloro", "necochea_163", "CABA", Cordoba, "87231566812");
+		Ccentro_salud misiones("Hospital Favaloro", "necochea_163", "CABA", Misiones, "87236426344");
+		Ccentro_salud jujuy("Hospital Favaloro", "necochea_163", "CABA", Jujuy, "87623486265");
+		Ccentro_salud santiagoDelEstero("Hospital Favaloro", "necochea_163", "CABA", Santiago_del_Estero, "12376736434");
+		Ccentro_salud RioNegro("Hospital Favaloro", "necochea_163", "CABA", Rio_Negro, "89726345323");*/
+
+
+	Csangre* sangre = new Csangre(*sangre);
+	Cplasma* plasma = new Cplasma(*plasma);
+	Cmedula* medula = new Cmedula(*medula);
+
+
+	vector<Cregistro*>registroSanLuis;
+	Cregistro registro1(1685631856, 1.6, *sangre);
+	Cregistro registro2(1767141967, 0.4, *medula);
+	Cregistro registro3(1783173541, 0.9, *plasma);
+	registroSanLuis.push_back(&registro1);
+	registroSanLuis.push_back(&registro2);
+	registroSanLuis.push_back(&registro3);
+
+	vector<Cregistro*>registroBsAs;
+	Cregistro registro1(1781712431, 1.1, *sangre);
+	Cregistro registro2(1872472812, 1.4, *medula);
+	Cregistro registro3(1787163568, 0.7, *plasma);
+	registroBsAs.push_back(&registro1);
+	registroBsAs.push_back(&registro2);
+	registroBsAs.push_back(&registro3);
+
+	vector<Cregistro*>registroChubut;
+	Cregistro registro1(1698673720, 1.4, *sangre);
+	Cregistro registro2(1792184829, 0.2, *medula);
+	Cregistro registro3(1918367191, 3.2, *plasma);
+	registroChubut.push_back(&registro1);
+	registroChubut.push_back(&registro2);
+	registroChubut.push_back(&registro3);
+
+	vector<Cregistro*>registroFava;
+	Cregistro registro1(1781936291, 1.7, *sangre);
+	Cregistro registro2(1817250281, 1.4, *medula);
+	Cregistro registro3(1858290101, 0.7, *plasma);
+	registroFava.push_back(&registro1);
+	registroFava.push_back(&registro2);
+	registroFava.push_back(&registro3);
+
+	vector<Cregistro*>registroMendoza;
+	Cregistro registro1(1783912281, 2.4, *sangre);
+	Cregistro registro2(1837129811, 0.3, *medula);
+	Cregistro registro3(1781971913, 1.2, *plasma);
+	registroMendoza.push_back(&registro1);
+	registroMendoza.push_back(&registro2);
+	registroMendoza.push_back(&registro3);
 
 	vector<Ccentro_salud*> centros_salud;
 	centros_salud + Favaloro;
 	centros_salud + mendoza;
 	centros_salud + BsAs;
 	centros_salud + chubut;
-	centros_salud + sanJuan;
 	centros_salud + sanLuis;
+
+	/*
+	* centros_salud + sanJuan;
 	centros_salud + cordoba;
 	centros_salud + misiones;
 	centros_salud + jujuy;
 	centros_salud + santiagoDelEstero;
-	centros_salud + RioNegro;
+	centros_salud + RioNegro;*/
 
-	Cdonante delfi(19, 60, false, false, "delfina", "Hanish", "23726575889", 'f', "45474635", 1078066714);
-	Creceptor graciela(1685631856, 0, estable, "graciela", "duarte", "82346546325", "45522914", 'f', 1073055965);
-	Creceptor mateoE(1685631856, 0, inestable, "mateo", "espejo", "82346546325", "45522914", 'm', 1073055965);
-	Creceptor facundo(1685631856, 0, recibio, "facundo", "baztan", "82346546325", "45522914", 'm', 1073055965);
+	Cdonante delfi(19, 65.3, false, false, "delfina", "Hanish", "23726575889", 'f', "45474635", 1078066714, registroSanLuis);
+	Creceptor graciela(1685631856, 0, estable, "graciela", "duarte", "82346546325", "45522914", 'f', 1073055965, sangre);
+	Creceptor mateoE(1685631856, 0, inestable, "mateo", "espejo", "82346546325", "45522914", 'm', 1073055965, medula);
+	Creceptor facundo(1685631856, 0, recibio, "facundo", "baztan", "82346546325", "45522914", 'm', 1073055965, plasma);
+	pacientesSanLuis + delfi;
+	pacientesSanLuis + graciela;
+	pacientesSanLuis + mateoE;
+	pacientesSanLuis + facundo;
 
-	Cdonante martinS(19, 60, false, false, "martin", "scorza", "89171234451", 'm', "45474635", 1078066714);
-	Creceptor martinB(1685631856, 0, estable, "martin", "ballarino", "89765147246", "45522914", 'm', 1073055965);
-	Creceptor juan(1685631856, 0, inestable, "juan", "felis", "82346546325", "45522914", 'm', 1073055965);
-	Creceptor mateoC(1685631856, 0, inestable, "mateo", "Carlin", "82346546325", "45522914", 'm', 1073055965);
+	Cdonante martinS(19, 60, false, false, "martin", "scorza", "89171234451", 'm', "45474635", 1078066714, registroBsAs);
+	Creceptor martinB(1685631856, 0, estable, "martin", "ballarino", "89765147246", "45522914", 'm', 1073055965, medula);
+	Creceptor juan(1685631856, 0, inestable, "juan", "felis", "82346546325", "45522914", 'm', 1073055965, plasma);
+	Creceptor mateoC(1685631856, 0, inestable, "mateo", "Carlin", "82346546325", "45522914", 'm', 1073055965, sangre);
+	pacientesBsAs + martinS;
+	pacientesBsAs + martinB;
+	pacientesBsAs + juan;
+	pacientesBsAs + mateoC;
 
-	Cdonante saul(19, 60, false, false, "saul", "lezama", "23726575889", 'f', "45474635", 1078066714);
-	Creceptor maria(1685631856, 0, estable, "maria", "durand", "82346546325", "45522914", 'f', 1073055965);
-	Creceptor mirtha(1685631856, 0, inestable, "mirtha", "legrand", "82346546325", "45522914", 'f', 1073055965);
-	Creceptor liliana(1685631856, 0, inestable, "liliana", "cruz", "82346546325", "45522914", 'f', 1073055965);
+	Cdonante saul(19, 60, false, false, "saul", "lezama", "23726575889", 'f', "45474635", 1078066714, registroMendoza);
+	Creceptor maria(1685631856, 0, estable, "maria", "durand", "82346546325", "45522914", 'f', 1073055965, medula);
+	Creceptor mirtha(1685631856, 0, inestable, "mirtha", "legrand", "82346546325", "45522914", 'f', 1073055965, plasma);
+	Creceptor liliana(1685631856, 0, inestable, "liliana", "cruz", "82346546325", "45522914", 'f', 1073055965, sangre);
+	pacientesMendoza + saul;
+	pacientesMendoza + maria;
+	pacientesMendoza + mirtha;
+	pacientesMendoza + liliana;
 
-	Cdonante isabella(19, 60, false, false, "isabella", "ferrari", "23726575889", 'f', "45474635", 1078066714);
-	Creceptor emilia(1685631856, 0, inestable, "emilia", "janin", "82346546325", "45522914", 'f', 1073055965);
-	Creceptor pedro(1685631856, 0, inestable, "pedro", "kocho", "82346546325", "45522914", 'm', 1073055965);
-	Creceptor serafin(1685631856, 0, inestable, "serafin", "quesada", "82346546325", "45522914", 'm', 1073055965);
+	Cdonante isabella(19, 60, false, false, "isabella", "ferrari", "23726575889", 'f', "45474635", 1078066714, registroFava);
+	Creceptor emilia(1685631856, 0, inestable, "emilia", "janin", "82346546325", "45522914", 'f', 1073055965, medula);
+	Creceptor pedro(1685631856, 0, inestable, "federico", "fioriti", "82346546325", "45522914", 'm', 1073055965, sangre);
+	Creceptor serafin(1685631856, 0, inestable, "serafin", "quesada", "82346546325", "45522914", 'm', 1073055965, plasma);
+	pacientesFava + isabella;
+	pacientesFava + emilia;
+	pacientesFava + pedro;
+	pacientesFava + serafin;
 
-	Cdonante ernesto(19, 60, false, false, "ernesto", "guisa", "23726575889", 'm', "45474635", 1078066714);
-	Creceptor federicoL(1685631856, 0, inestable, "federico", "lopez", "82346546325", "45522914", 'm', 1073055965);
-	Creceptor lorenzo(1685631856, 0, inestable, "lorenzo", "hernandez", "82346546325", "45522914", 'm', 1073055965);
-	Creceptor juancho(1685631856, 0, inestable, "juancho", "perez", "82346546325", "45522914", 'm', 1073055965);
 
+	Cdonante ernesto(19, 60, false, false, "ernesto", "guisa", "23726575889", 'm', "45474635", 1078066714, registroChubut);
+	Creceptor federicoL(1685631856, 0, inestable, "federico", "lopez", "82346546325", "45522914", 'm', 1073055965, plasma);
+	Creceptor lorenzo(1685631856, 0, inestable, "lorenzo", "hernandez", "82346546325", "45522914", 'm', 1073055965, medula);
+	Creceptor juancho(1685631856, 0, inestable, "juancho", "perez", "82346546325", "45522914", 'm', 1073055965, sangre);
+	pacientesChubut + ernesto;
+	pacientesChubut + federicoL;
+	pacientesChubut + lorenzo;
+	pacientesChubut + juancho;
+
+	/*
 	Cdonante guadalupe(19, 60, false, false, "guadalupe", "helou", "23726575889", 'f', "45474635", 1078066714);
 	Creceptor valentina(1685631856, 0, inestable, "valentina", "mao", "82346546325", "45522914", 'f', 1073055965);
 	Creceptor juana(1685631856, 0, inestable, "juana", "juarez", "82346546325", "45522914", 'f', 1073055965);
@@ -169,6 +246,11 @@ int main() {
 	Creceptor kylian(1685631856, 0, inestable, "kylian", "mbappe", "27198501361", "45522914", 'm', 1073055965);
 	Creceptor guido(1685631856, 0, inestable, "guido", "kazka", "82346546325", "45522914", 'm', 1073055965);
 	Creceptor pepe(1685631856, 0, inestable, "pepe", "pepon", "82346546325", "45522914", 'm', 1073055965);
-
+	*/
 	CBSA BSA(centros_salud);
+	
+	
+	delete sangre; 
+	delete medula;
+	delete plasma; 
 }

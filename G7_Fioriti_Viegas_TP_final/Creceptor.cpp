@@ -4,7 +4,7 @@ Creceptor::Creceptor():Cpaciente()
 {
 }
 
-Creceptor::Creceptor(time_t fecha_ingreso, time_t* recibio, estados estado, string nombre, string apellido, string telefono, string dni, char sexo, time_t fecha, Cfluido& necesita, Cfluido& sangre, Cfluido& medula, Cfluido& plasma):Cpaciente(nombre,apellido,fecha,sexo,telefono,dni, sangre, plasma, medula)
+Creceptor::Creceptor(time_t fecha_ingreso, time_t* recibio, estados estado, string nombre, string apellido, string telefono, string dni, char sexo, time_t fecha, Cfluido& necesita):Cpaciente(nombre,apellido,fecha,sexo,telefono,dni,sexo)
 {
 	unsigned int acum = 0;
 	time_t diferencia;
