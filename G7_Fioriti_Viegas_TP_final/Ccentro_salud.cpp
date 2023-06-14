@@ -76,7 +76,7 @@ void Ccentro_salud::dono(unsigned int donante)
 {
 	Cdonante* paciente = dynamic_cast<Cdonante*>(this->pacientes[donante]);
 	paciente->set_meses(true);
-	paciente->anular_registro();
+	(*paciente).nuevo_registro();
 }
 
 void Ccentro_salud::agregar_paciente(Cpaciente& paciente)
@@ -131,13 +131,13 @@ bool operator==(Creceptor& Cr , Cdonante& Cd)
 {
 	bool compatible = false;
 	if (Cr.get_estado() != 2) {
-		Csangre* sangre = dynamic_cast<Csangre*>(Cd.get_sangre());
+		Csangre* sangre = dynamic_cast<Csangre*>(Cd.get_registro()[Cd.get_registro().size()-1]->get_fluido());
 		if(sangre != nullptr)
 			compatible = Cr.verificar_trasfusion(sangre->get_Rh(), sangre->get_tipo());
-		Cmedula* medula = dynamic_cast<Cmedula*>(Cd.get_registro()->get_fluido());
+		Cmedula* medula = dynamic_cast<Cmedula*>(Cd.get_registro()[Cd.get_registro().size()-1]->get_fluido());
 		if (medula != nullptr)
 			compatible = true;
-		Cplasma* plasma = dynamic_cast<Cplasma*>(Cd.get_registro()->get_fluido());
+		Cplasma* plasma = dynamic_cast<Cplasma*>(Cd.get_registro()[Cd.get_registro().size()-1]->get_fluido());
 		if (plasma == nullptr)
 			compatible = true;
 	}
@@ -148,14 +148,14 @@ bool operator!=(Creceptor& Cr, Cdonante& Cd)
 {
 	bool compatible = true;
 	if (Cr.get_estado() != 2) {
-		Csangre* sangre = dynamic_cast<Csangre*>(Cd.get_registro()->get_fluido());
+		Csangre* sangre = dynamic_cast<Csangre*>(Cd.get_registro()[Cd.get_registro().size()-1]->get_fluido());
 		if (sangre != nullptr)
 			if (Cr.verificar_trasfusion(sangre->get_Rh(), sangre->get_tipo()) && Cd.VerificarFechaMax())
 				compatible = false;
-		Cmedula* medula = dynamic_cast<Cmedula*>(Cd.get_registro()->get_fluido());
+		Cmedula* medula = dynamic_cast<Cmedula*>(Cd.get_registro()[Cd.get_registro().size()-1]->get_fluido());
 		if (medula != nullptr && Cd.VerificarFechaMax())
 			compatible = false;
-		Cplasma* plasma = dynamic_cast<Cplasma*>(Cd.get_registro()->get_fluido());
+		Cplasma* plasma = dynamic_cast<Cplasma*>(Cd.get_registro()[Cd.get_registro().size()]->get_fluido());
 		if (plasma == nullptr && Cd.VerificarFechaMax())
 			compatible = false;
 	}

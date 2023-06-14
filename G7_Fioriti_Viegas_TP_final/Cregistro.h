@@ -12,6 +12,7 @@ class Cregistro
 	Cfluido* fluido;
 public:
 	Cregistro(time_t fecha_extraccion, float volumen, Cfluido* fluido);
+	Cregistro();
 	~Cregistro();
 	string to_string();
 	void imprimir();

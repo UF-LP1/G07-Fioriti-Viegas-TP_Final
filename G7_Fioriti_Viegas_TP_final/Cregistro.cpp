@@ -7,6 +7,10 @@ Cregistro::Cregistro(time_t fecha_extraccion, float volumen, Cfluido* fluido)
 	this->fluido = fluido;
 }
 
+Cregistro::Cregistro()
+{
+}
+
 Cregistro::~Cregistro()
 {
 }
