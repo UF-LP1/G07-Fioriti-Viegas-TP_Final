@@ -76,7 +76,7 @@ void Ccentro_salud::dono(unsigned int donante)
 {
 	Cdonante* paciente = dynamic_cast<Cdonante*>(this->pacientes[donante]);
 	paciente->set_meses(true);
-	paciente.
+	paciente->anular_registro();
 }
 
 void Ccentro_salud::agregar_paciente(Cpaciente& paciente)
@@ -132,17 +132,32 @@ bool operator==(Creceptor& Cr , Cdonante& Cd)
 	bool compatible = false;
 	if (Cr.get_estado() != 2) {
 		Csangre* sangre = dynamic_cast<Csangre*>(Cd.get_sangre());
-		compatible = Cr.verificar_trasfusion(sangre->get_Rh(), sangre->get_tipo());
+		if(sangre != nullptr)
+			compatible = Cr.verificar_trasfusion(sangre->get_Rh(), sangre->get_tipo());
+		Cmedula* medula = dynamic_cast<Cmedula*>(Cd.get_registro()->get_fluido());
+		if (medula != nullptr)
+			compatible = true;
+		Cplasma* plasma = dynamic_cast<Cplasma*>(Cd.get_registro()->get_fluido());
+		if (plasma == nullptr)
+			compatible = true;
 	}
 	return compatible;
 }
 
 bool operator!=(Creceptor& Cr, Cdonante& Cd)
 {
-	bool compatible = false;
+	bool compatible = true;
 	if (Cr.get_estado() != 2) {
-		Csangre* sangre = dynamic_cast<Csangre*>(Cd.get_sangre());
-		compatible = Cr.verificar_trasfusion(sangre->get_Rh(), sangre->get_tipo());
+		Csangre* sangre = dynamic_cast<Csangre*>(Cd.get_registro()->get_fluido());
+		if (sangre != nullptr)
+			if (Cr.verificar_trasfusion(sangre->get_Rh(), sangre->get_tipo()) && Cd.VerificarFechaMax())
+				compatible = false;
+		Cmedula* medula = dynamic_cast<Cmedula*>(Cd.get_registro()->get_fluido());
+		if (medula != nullptr && Cd.VerificarFechaMax())
+			compatible = false;
+		Cplasma* plasma = dynamic_cast<Cplasma*>(Cd.get_registro()->get_fluido());
+		if (plasma == nullptr && Cd.VerificarFechaMax())
+			compatible = false;
 	}
 	return compatible;
 }

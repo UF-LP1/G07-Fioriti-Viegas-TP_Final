@@ -4,7 +4,7 @@ Creceptor::Creceptor():Cpaciente()
 {
 }
 
-Creceptor::Creceptor(time_t fecha_ingreso, time_t* recibio, estados estado, string nombre, string apellido, string telefono, string dni, char sexo, time_t fecha):Cpaciente(nombre,apellido,fecha,sexo,telefono,dni)
+Creceptor::Creceptor(time_t fecha_ingreso, time_t* recibio, estados estado, string nombre, string apellido, string telefono, string dni, char sexo, time_t fecha, Cfluido* necesita):Cpaciente(nombre,apellido,fecha,sexo,telefono,dni)
 {
 	unsigned int acum = 0;
 	time_t diferencia;
@@ -29,6 +29,7 @@ Creceptor::Creceptor(time_t fecha_ingreso, time_t* recibio, estados estado, stri
 	this->prioridad = acum;
 	this->estado = estado;
 	this->recibio = recibio;
+	this->necesita = necesita;
 }
 
 Creceptor::~Creceptor()
@@ -131,6 +132,11 @@ string Creceptor::get_dni()
 time_t* Creceptor::get_recibio()
 {
 	return this->recibio;
+}
+
+Cfluido* Creceptor::get_necesita()
+{
+	return this->necesita;
 }
 
 void Creceptor::set_recibio(time_t recibio)

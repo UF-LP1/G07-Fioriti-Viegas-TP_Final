@@ -33,6 +33,11 @@ bool Cdonante::get_meses()
 	return this->meses;
 }
 
+Cregistro* Cdonante::get_registro()
+{
+	return this->registro;
+}
+
 void Cdonante::set_meses(bool meses)
 {
 	this->meses = meses;
@@ -40,21 +45,21 @@ void Cdonante::set_meses(bool meses)
 
 bool Cdonante::VerificarFechaMax()
 {
-	bool caducado = true;
+	bool enCondiciones = false;
 	Csangre* sangre = dynamic_cast<Csangre*>(this->registro->get_fluido());
 	if (sangre != nullptr)
-		caducado = sangre->VerificarFechaMaxima(this->registro->get_fecha_extraccion());
+		enCondiciones = sangre->VerificarFechaMaxima(this->registro->get_fecha_extraccion());
 	Cplasma* plasma = dynamic_cast<Cplasma*>(this->registro->get_fluido());
 	if (plasma != nullptr)
-		caducado = plasma->VerificarFechaMaxima(this->registro->get_fecha_extraccion());
+		enCondiciones = plasma->VerificarFechaMaxima(this->registro->get_fecha_extraccion());
 	Cmedula* medula = dynamic_cast<Cmedula*>(this->registro->get_fluido());
 	if (medula != nullptr)
-		caducado = medula->VerificarFechaMaxima(this->registro->get_fecha_extraccion());
+		enCondiciones = medula->VerificarFechaMaxima(this->registro->get_fecha_extraccion());
 	delete sangre;
 	delete plasma;
 	delete medula;
 
-	return caducado;
+	return enCondiciones;
 
 }
 

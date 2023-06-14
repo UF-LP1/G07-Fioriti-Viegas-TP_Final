@@ -25,16 +25,16 @@ void Csangre::imprimir()
 
 bool Csangre::VerificarFechaMaxima(time_t extraccion)
 {
-	bool vencio = true;
+	bool enCondiciones = false;
 	time_t tiempo_actual = time(nullptr); // obtengo el tiempo actual.
 	double diferenciaSegundos = difftime(tiempo_actual, extraccion); // la funcion difftime calcula la diferencia entre dos fechas time_t y devuelve EN SEGUNDOS. 
 	int diferenciaDias = static_cast<int>(diferenciaSegundos / (24 * 60 * 60)); // convierto la diferencia a dias
 
 	if (diferenciaDias <= this->caducidad)
-		vencio = false;
+		enCondiciones = true;
 	else
-		vencio = true;
-	return vencio;
+		enCondiciones = false;
+	return enCondiciones;
 }
 
 char Csangre::get_Rh()

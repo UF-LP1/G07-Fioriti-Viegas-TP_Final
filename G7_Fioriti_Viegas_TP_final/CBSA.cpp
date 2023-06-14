@@ -101,20 +101,16 @@ void CBSA::empezar_transfusion()
 void CBSA::encontrar_donante(unsigned int centro, Creceptor& receptor, unsigned int paciente)
 {
 	int i = 0, j;
-	bool compatible;
+	
 	while (i < this->centros.size())
 	{
 		if (this->centros[centro]->get_provincia() == this->centros[i]->get_provincia())
 			j = 0;
 		while (j < this->centros[i]->get_lista().size()) {
 			Cdonante* donante = dynamic_cast<Cdonante*>(this->centros[i]->get_lista()[j]);
-			if (donante != nullptr && donante->get_meses() != true && donante->VerificarFechaMax() == false) {
-				Csangre* sangre = dynamic_cast<Csangre*>(donante->get_sangre());
-				compatible = receptor.verificar_trasfusion(sangre->get_Rh(), sangre->get_tipo());
-				if (compatible) {
+			if (donante != nullptr && receptor == *donante) { //con la sobrecarga del operador == verifico la caducidad, que se done lo que se necesita y si es compatible
 					this->centros[centro]->recibe(paciente);
-				}
-
+					this->centros[centro]->dono(j);
 			}
 		}
 

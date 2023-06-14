@@ -16,6 +16,7 @@ public:
 	float get_peso();
 	bool get_enfermedades();
 	bool get_meses();
+	Cregistro* get_registro();
 	void set_meses(bool meses);
 	bool VerificarFechaMax();
 	void anular_registro();
