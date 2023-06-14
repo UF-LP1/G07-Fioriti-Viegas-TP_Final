@@ -31,7 +31,7 @@ public:
 	void recibe(unsigned int receptor);
 	void dono(unsigned int donante);
 	void agregar_paciente(Cpaciente& paciente);
-	void eliminarPa(Cpaciente& paciente);
+	void eliminarPa(unsigned int posicion);
 	friend ostream& operator<<(ostream& out, Ccentro_salud& C);
 };
 vector<Cpaciente*> operator+(vector<Cpaciente*>& lista, Cpaciente& C);

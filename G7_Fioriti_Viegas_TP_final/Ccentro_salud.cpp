@@ -84,9 +84,9 @@ void Ccentro_salud::agregar_paciente(Cpaciente& paciente)
 	this->pacientes + paciente;
 }
 
-void Ccentro_salud::eliminarPa(Cpaciente& P)
+void Ccentro_salud::eliminarPa(unsigned int posicion)
 {
-	this->pacientes - P;
+	this->pacientes - *this->pacientes[posicion];
 }
 
 ostream& operator<<(ostream& out, Ccentro_salud& C)

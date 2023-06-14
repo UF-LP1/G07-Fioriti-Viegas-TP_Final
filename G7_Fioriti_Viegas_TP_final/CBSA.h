@@ -16,7 +16,7 @@ public:
 	void empezar_transfusion();
 	void encontrar_donante(unsigned int centro, Creceptor& receptor, unsigned int paciente);
 	void donaciones_provincia();
-	void eliminarPaciente(Cpaciente& P);
+	void eliminarPaciente(string dni);
 	void agregar_donante(Cpaciente& donante, Ccentro_salud &centro);
 	void agregar_receptor(Cpaciente& receptor, Ccentro_salud &centro);
 	friend ostream& operator<<(ostream& out, const CBSA& C);
