@@ -128,7 +128,7 @@ string Creceptor::get_dni()
 	return this->dni;
 }
 
-time_t Creceptor::get_recibio()
+time_t* Creceptor::get_recibio()
 {
 	return this->recibio;
 }

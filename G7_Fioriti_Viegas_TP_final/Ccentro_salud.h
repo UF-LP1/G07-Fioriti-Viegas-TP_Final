@@ -12,7 +12,6 @@ using namespace std;
 class Ccentro_salud
 {
 	vector<Cpaciente*> pacientes;
-	vector<Cregistro*> registros;
 	string direccion;
 	string partido;
 	provincias provincia;

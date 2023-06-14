@@ -93,6 +93,7 @@ void CBSA::empezar_transfusion()
 				}
 			j++;
 		}
+		i++;
 	}
 	encontrar_donante(centro, *prioridad, paciente);
 }
@@ -107,7 +108,7 @@ void CBSA::encontrar_donante(unsigned int centro, Creceptor& receptor, unsigned 
 			j = 0;
 		while (j < this->centros[i]->get_lista().size()) {
 			Cdonante* donante = dynamic_cast<Cdonante*>(this->centros[i]->get_lista()[j]);
-			if (donante != nullptr && donante->get_meses() != true && donante.) {
+			if (donante != nullptr && donante->get_meses() != true && donante->VerificarFechaMax() == false) {
 				Csangre* sangre = dynamic_cast<Csangre*>(donante->get_sangre());
 				compatible = receptor.verificar_trasfusion(sangre->get_Rh(), sangre->get_tipo());
 				if (compatible) {
