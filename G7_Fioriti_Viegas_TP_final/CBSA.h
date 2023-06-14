@@ -1,5 +1,6 @@
 #pragma once
 #include "Ccentro_salud.h"
+#include <exception>
 
 using namespace std;
 

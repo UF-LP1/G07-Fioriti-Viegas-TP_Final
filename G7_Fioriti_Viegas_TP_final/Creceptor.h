@@ -11,7 +11,7 @@ class Creceptor: public Cpaciente
 	Cfluido* necesita;
 public:
 	Creceptor();
-	Creceptor(time_t fecha_ingreso,time_t* recibio, estados estado, string nombre, string apellido, string telefono, string dni, char sexo, time_t fecha, Cfluido* necesita);
+	Creceptor(time_t fecha_ingreso,time_t* recibio, estados estado, string nombre, string apellido, string telefono, string dni, char sexo, time_t fecha, Cfluido& necesita, Cfluido& sangre, Cfluido&medula, Cfluido& plasma);
 	~Creceptor();
 	string to_string();
 	void imprimir();

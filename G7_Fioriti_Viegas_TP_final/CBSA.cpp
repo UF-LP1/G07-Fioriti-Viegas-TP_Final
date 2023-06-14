@@ -25,6 +25,7 @@ void CBSA::Buscar_espera(/*string nombre, int provincia, string direccion*/)
 					ninguno = false;
 				}
 			j++;
+			delete receptor;
 		}
 		if (ninguno == true)
 			cout << "Ninguno." << endl;
@@ -44,6 +45,7 @@ unsigned int CBSA::buscar_prioridad_receptor(string dni)
 					return receptor->get_prioridad();
 				}
 			j++;
+			delete receptor;
 		}
 		i++;
 	}
@@ -80,12 +82,12 @@ void CBSA::empezar_transfusion()
 				centro = 0;
 				paciente = 0;
 			}
-			else if (receptor->get_prioridad() > prioridad->get_prioridad()) {
+			else if (receptor != nullptr && receptor->get_prioridad() > prioridad->get_prioridad()) {
 				prioridad = receptor;
 				centro = i;
 				paciente = j;
 			}
-			else if (receptor->get_prioridad() == prioridad->get_prioridad())
+			else if (receptor != nullptr && receptor->get_prioridad() == prioridad->get_prioridad())
 				if (receptor->get_ingreso() < prioridad->get_ingreso()) {
 					prioridad = receptor;
 					centro = i;
@@ -111,11 +113,14 @@ void CBSA::encontrar_donante(unsigned int centro, Creceptor& receptor, unsigned 
 			srand(time(NULL));
 			int aleatorio = rand() % 2;
 			if (donante != nullptr && receptor == *donante) { //con la sobrecarga del operador == verifico la caducidad, que se done lo que se necesita y si es compatible
+				delete donante;
 				if (aleatorio == 1) {
 					this->centros[centro]->recibe(paciente);
 					this->centros[centro]->dono(j);
+					break;
 				}
-				//hacer throw
+				else
+					throw new exception("Transfusion fallida!!");
 			}
 			j++;
 		}

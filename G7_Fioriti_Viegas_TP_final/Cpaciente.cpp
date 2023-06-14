@@ -4,7 +4,7 @@ Cpaciente::Cpaciente()
 {
 }
 
-Cpaciente::Cpaciente(string nombre, string apellido, time_t fecha, char sexo, string telefono, string dni)
+Cpaciente::Cpaciente(string nombre, string apellido, time_t fecha, char sexo, string telefono, string dni, Cfluido& sangre, Cfluido& plasma, Cfluido& medula)
 {
 	this->nombre = nombre;
 	this->apellido = apellido;
@@ -12,6 +12,9 @@ Cpaciente::Cpaciente(string nombre, string apellido, time_t fecha, char sexo, st
 	this->sexo = sexo;
 	this->telefono = telefono;
 	this->dni = dni;
+	this->medula = &medula;
+	this->plasma = &plasma;
+	this->sangre = &sangre;
 }
 
 Cpaciente::~Cpaciente()
