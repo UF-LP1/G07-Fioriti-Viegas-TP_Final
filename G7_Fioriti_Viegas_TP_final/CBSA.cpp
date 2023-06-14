@@ -108,10 +108,14 @@ void CBSA::encontrar_donante(unsigned int centro, Creceptor& receptor, unsigned 
 			j = 0;
 		while (j < this->centros[i]->get_lista().size()) {
 			Cdonante* donante = dynamic_cast<Cdonante*>(this->centros[i]->get_lista()[j]);
+			srand(time(NULL));
+			int aleatorio = rand() % 2;
 			if (donante != nullptr && receptor == *donante) { //con la sobrecarga del operador == verifico la caducidad, que se done lo que se necesita y si es compatible
-
-				this->centros[centro]->recibe(paciente);
-				this->centros[centro]->dono(j);
+				if (aleatorio == 1) {
+					this->centros[centro]->recibe(paciente);
+					this->centros[centro]->dono(j);
+				}
+				//hacer throw
 			}
 			j++;
 		}
