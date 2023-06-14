@@ -118,14 +118,34 @@ estados Creceptor::get_estado()
 	return this->estado;
 }
 
+time_t Creceptor::get_ingreso()
+{
+	return this->fecha_ingreso;
+}
+
 string Creceptor::get_dni()
 {
 	return this->dni;
 }
 
-time_t* Creceptor::get_recibio()
+time_t Creceptor::get_recibio()
 {
 	return this->recibio;
+}
+
+void Creceptor::set_recibio(time_t recibio)
+{
+	this->recibio = &recibio;
+}
+
+void Creceptor::set_prioridad(unsigned int prioridad)
+{
+	this->prioridad = prioridad;
+}
+
+void Creceptor::set_estado(estados estado)
+{
+	this->estado = estado;
 }
 
 unsigned int Creceptor::get_prioridad()

@@ -13,7 +13,8 @@ public:
 	unsigned int buscar_prioridad_receptor(string dni);
 	void imprimir();
 	string to_string();
-	void empezar_tramite();
+	void empezar_transfusion();
+	void encontrar_donante(unsigned int centro, Creceptor& receptor, unsigned int paciente);
 	void donaciones_provincia();
 	void eliminarPaciente(Cpaciente& P);
 	void agregar_donante(Cpaciente& donante, Ccentro_salud &centro);

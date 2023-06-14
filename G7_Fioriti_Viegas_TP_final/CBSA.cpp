@@ -11,9 +11,10 @@ CBSA::~CBSA()
 
 void CBSA::Buscar_espera(/*string nombre, int provincia, string direccion*/)
 {
-	int i = 0, j = 0;
+	int i = 0, j;
 	bool ninguno = true;
 	while(i != this->centros.size()) {
+		j = 0;
 		while(j != this->centros[i]->get_lista().size()) { //de lo contrario, if(this->centros[i]->get_nombre() == nombre && this->centros[i]->get_provincia() == provincia && this->centros[i]->get_direccion == direccion)
 			ninguno = true;
 			Creceptor* receptor = dynamic_cast<Creceptor*>(this->centros[i]->get_lista()[j]);
@@ -33,8 +34,9 @@ void CBSA::Buscar_espera(/*string nombre, int provincia, string direccion*/)
 
 unsigned int CBSA::buscar_prioridad_receptor(string dni) 
 {
-	int i = 0, j = 0;
+	int i = 0, j;
 	while(i != this->centros.size()) {
+		j = 0;
 		while(j != this->centros[i]->get_lista().size()) {
 			Creceptor* receptor = dynamic_cast<Creceptor*>(this->centros[i]->get_lista()[j]);
 			if (receptor != nullptr)
@@ -65,14 +67,56 @@ string CBSA::to_string()
 	return salida.str();
 }
 
-void CBSA::empezar_tramite()
+void CBSA::empezar_transfusion()
 {
-	int i = 0, j = 0;
-	Creceptor* receptor = new Creceptor();
+	int i = 0, j, centro, paciente;
+	Creceptor* prioridad = new Creceptor();
 	while (i < this->centros.size()) {
+		j = 0;
 		while (j < this->centros[i]->get_lista().size()) {
-
+			Creceptor* receptor = dynamic_cast<Creceptor*>(this->centros[i]->get_lista()[j]);
+			if (receptor != nullptr && i == 0 && j == 0) {
+				prioridad = receptor;
+				centro = 0;
+				paciente = 0;
+			}
+			else if (receptor->get_prioridad() > prioridad->get_prioridad()) {
+				prioridad = receptor;
+				centro = i;
+				paciente = j;
+			}
+			else if (receptor->get_prioridad() == prioridad->get_prioridad())
+				if (receptor->get_ingreso() < prioridad->get_ingreso()) {
+					prioridad = receptor;
+					centro = i;
+					paciente = j;
+				}
+			j++;
 		}
+	}
+	encontrar_donante(centro, *prioridad, paciente);
+}
+
+void CBSA::encontrar_donante(unsigned int centro, Creceptor& receptor, unsigned int paciente)
+{
+	int i = 0, j;
+	bool compatible;
+	while (i < this->centros.size())
+	{
+		if (this->centros[centro]->get_provincia() == this->centros[i]->get_provincia())
+			j = 0;
+		while (j < this->centros[i]->get_lista().size()) {
+			Cdonante* donante = dynamic_cast<Cdonante*>(this->centros[i]->get_lista()[j]);
+			if (donante != nullptr && donante->get_meses() != true && donante.) {
+				Csangre* sangre = dynamic_cast<Csangre*>(donante->get_sangre());
+				compatible = receptor.verificar_trasfusion(sangre->get_Rh(), sangre->get_tipo());
+				if (compatible) {
+					this->centros[centro]->recibe(paciente);
+				}
+
+			}
+		}
+
 	}
 }
 
@@ -85,7 +129,7 @@ void CBSA::donaciones_provincia()
 	time_t now = time(NULL);
 	tm* ahora = new tm;
 	ahora = localtime(&now);
-	int h = 0, i = 0, j = 0;
+	int h = 0, i, j;
 	while(h < ahora->tm_mon + 1){
 		cout << "Mes " << h + 1 << endl;
 		acumCABA = 0;
@@ -112,8 +156,10 @@ void CBSA::donaciones_provincia()
 		acumFormosa = 0;
 		acumSantCruz = 0;
 		acumChaco = 0;
+		i = 0;
 		while(i < this->centros.size()) {
 			int p = this->centros[i]->get_provincia();
+			j = 0;
 			while(j < this->centros[i]->get_lista().size()) {
 				Creceptor* receptor = dynamic_cast<Creceptor*>(this->centros[i]->get_lista()[j]);
 				recibio = localtime(receptor->get_recibio());
@@ -205,9 +251,10 @@ void CBSA::donaciones_provincia()
 void CBSA::eliminarPaciente(Cpaciente& P)
 {
 	int i = 0;
-	int j = 0;
+	int j;
 	bool listo = false;
 	while(i < this->centros.size()) {
+		j = 0;
 		while(j < this->centros.size()) {
 			if (this->centros[i]->get_lista()[j] == &P) {
 				this->centros[i]->eliminarPa(P);

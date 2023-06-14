@@ -1,7 +1,8 @@
 #include "Cdonante.h"
 
-Cdonante::Cdonante(unsigned int edad, float peso, bool enfermedades, bool meses, string nombre, string apellido, string telefono, char sexo, string dni, time_t fecha):Cpaciente(nombre,apellido,fecha,sexo,telefono,dni)
+Cdonante::Cdonante(unsigned int edad, float peso, bool enfermedades, bool meses, string nombre, string apellido, string telefono, char sexo, string dni, time_t fecha, Cregistro registro):Cpaciente(nombre,apellido,fecha,sexo,telefono,dni)
 {
+	this->registro = &registro;
 	this->edad = edad;
 	this->peso = peso;
 	this->enfermedades = enfermedades;
@@ -30,6 +31,38 @@ bool Cdonante::get_enfermedades()
 bool Cdonante::get_meses()
 {
 	return this->meses;
+}
+
+void Cdonante::set_meses(bool meses)
+{
+	this->meses = meses;
+}
+
+bool Cdonante::VerificarFechaMax()
+{
+	bool caducado = true;
+	Csangre* sangre = dynamic_cast<Csangre*>(this->registro->get_fluido());
+	if (sangre != nullptr)
+		caducado = sangre->VerificarFechaMaxima(this->registro->get_fecha_extraccion());
+	Cplasma* plasma = dynamic_cast<Cplasma*>(this->registro->get_fluido());
+	if (plasma != nullptr)
+		caducado = plasma->VerificarFechaMaxima(this->registro->get_fecha_extraccion());
+	Cmedula* medula = dynamic_cast<Cmedula*>(this->registro->get_fluido());
+	if (medula != nullptr)
+		caducado = medula->VerificarFechaMaxima(this->registro->get_fecha_extraccion());
+	delete sangre;
+	delete plasma;
+	delete medula;
+
+	return caducado;
+
+}
+
+void Cdonante::anular_registro()
+{
+	this->registro->set_extraccion(-1);
+	this->registro->set_fluido(nullptr);
+	this->registro->set_volumen(0);
 }
 
 string Cdonante::to_string()

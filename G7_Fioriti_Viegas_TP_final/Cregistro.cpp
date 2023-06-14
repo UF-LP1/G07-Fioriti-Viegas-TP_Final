@@ -1,8 +1,7 @@
 #include "Cregistro.h"
 
-Cregistro::Cregistro(time_t fecha_extraccion, unsigned int volumen, Cdonante* donante, Cfluido* fluido)
+Cregistro::Cregistro(time_t fecha_extraccion, float volumen, Cfluido* fluido)
 {
-	this->donante = donante;
 	this->fecha_extraccion = fecha_extraccion;
 	this->volumen = volumen;
 	this->fluido = fluido;
@@ -16,7 +15,7 @@ string Cregistro::to_string()
 {
 	stringstream salida;
 	tm* fecha = localtime(&this->fecha_extraccion);
-	salida << "Donante: " << this->donante->to_string() << "Fecha de extraccion del fluido: " << fecha->tm_mday << "/" << fecha->tm_mon + 1 << "/" << fecha->tm_year + 1900 << endl << this->volumen << "ml" << endl;
+	salida << "Fecha de extraccion del fluido: " << fecha->tm_mday << "/" << fecha->tm_mon + 1 << "/" << fecha->tm_year + 1900 << endl << this->volumen << "ml" << endl;
 	return ;
 }
 
@@ -25,23 +24,29 @@ void Cregistro::imprimir()
 	cout << this->to_string() << endl;
 }
 
-bool Cregistro::VerificarFechaMax()
+time_t Cregistro::get_fecha_extraccion()
 {
-	bool caducado = true;
-	Csangre* sangre = dynamic_cast<Csangre*>(this->fluido);
-	if (sangre != nullptr) 
-		caducado = sangre->VerificarFechaMaxima(this->fecha_extraccion);
-	Cplasma* plasma = dynamic_cast<Cplasma*>(this->fluido);
-	if (plasma != nullptr)
-		caducado = plasma->VerificarFechaMaxima(this->fecha_extraccion);
-	Cmedula* medula = dynamic_cast<Cmedula*>(this->fluido);
-	if (medula != nullptr)
-		caducado = medula->VerificarFechaMaxima(this->fecha_extraccion);
-	delete sangre;
-	delete plasma;
-	delete medula;
+	return this->fecha_extraccion;
+}
 
-	return caducado;
+Cfluido* Cregistro::get_fluido()
+{
+	return this->fluido;
+}
+
+void Cregistro::set_fluido(Cfluido* fluido)
+{
+	this->fluido = fluido;
+}
+
+void Cregistro::set_volumen(float volumen)
+{
+	this->volumen = volumen;
+}
+
+void Cregistro::set_extraccion(time_t extraccion)
+{
+	this->fecha_extraccion = extraccion;
 }
 
 ostream& operator<<(ostream& out, Cregistro& C)

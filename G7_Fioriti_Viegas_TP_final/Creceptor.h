@@ -16,8 +16,12 @@ public:
 	void imprimir();
 	bool verificar_trasfusion(char Rh, tipo_sangre tipo);
 	estados get_estado();
+	time_t get_ingreso();
 	string get_dni();
 	time_t* get_recibio();
+	void set_recibio(time_t recibio);
+	void set_prioridad(unsigned int prioridad);
+	void set_estado(estados estado);
 	unsigned int get_prioridad();
 	friend ostream& operator<<(ostream& out, Creceptor& C);
 };

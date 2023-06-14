@@ -1,12 +1,12 @@
 #include "Ccentro_salud.h"
 
-Ccentro_salud::Ccentro_salud(string nombre, string direccion, string partido, provincias provincia, string telefono)
+Ccentro_salud::Ccentro_salud(string nombre, string direccion, string partido, provincias provincia, string telefono, vector<Cpaciente*> pacientes): nombre(nombre)
 {
-	this->nombre = nombre;
 	this->direccion = direccion;
 	this->partido = partido;
 	this->provincia = provincia;
 	this->telefono = telefono;
+	this->pacientes = pacientes;
 }
 
 Ccentro_salud::~Ccentro_salud()
@@ -34,7 +34,7 @@ string Ccentro_salud::to_string()
 	return salida.str();
 }
 
-string Ccentro_salud::get_nombre()
+const string Ccentro_salud::get_nombre()
 {
 	return this->nombre;
 }
@@ -61,6 +61,22 @@ vector<Cpaciente*> Ccentro_salud::get_lista()
 
 void Ccentro_salud::ordenarPaciente()
 {
+}
+
+void Ccentro_salud::recibe(unsigned int receptor)
+{
+	Creceptor* paciente = dynamic_cast<Creceptor*>(this->pacientes[receptor]);
+	paciente->set_estado(recibio);
+	paciente->set_prioridad(0);
+	time_t now = time(NULL);
+	paciente->set_recibio(now);
+}
+
+void Ccentro_salud::dono(unsigned int donante)
+{
+	Cdonante* paciente = dynamic_cast<Cdonante*>(this->pacientes[donante]);
+	paciente->set_meses(true);
+	paciente.
 }
 
 void Ccentro_salud::agregar_paciente(Cpaciente& paciente)
