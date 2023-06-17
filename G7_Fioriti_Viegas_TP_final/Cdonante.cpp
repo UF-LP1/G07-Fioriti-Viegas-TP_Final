@@ -62,12 +62,7 @@ bool Cdonante::VerificarFechaMax()
 	Cmedula* medula = dynamic_cast<Cmedula*>(this->registro[i]->get_fluido());
 	if (medula != nullptr)
 		enCondiciones = medula->VerificarFechaMaxima(this->registro[i]->get_fecha_extraccion());
-	delete sangre;
-	delete plasma;
-	delete medula;
-
 	return enCondiciones;
-
 }
 
 string Cdonante::to_string()

@@ -123,10 +123,10 @@ int main() {
 
 	CBSA BSA(centros_salud);
 
-	vector<Cregistro*>registroChubut;
-	Cregistro registro1(1698673720, 1.4, *plasma);
-	Cregistro registro2(1792184829, 0.2, *medula);
-	Cregistro registro3(1918367191, 3.2, *sangre3);
+	vector<Cregistro*>registrodonante;
+	Cregistro registro1(1687018272, 1.4, *plasma);
+	Cregistro registro2(1687015784, 0.2, *medula);
+	Cregistro registro3(1687023118, 3.2, *sangre3);
 	registroChubut.push_back(&registro1);
 	registroChubut.push_back(&registro2);
 	registroChubut.push_back(&registro3);
