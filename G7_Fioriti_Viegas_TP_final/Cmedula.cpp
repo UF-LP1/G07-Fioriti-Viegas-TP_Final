@@ -23,8 +23,3 @@ bool Cmedula::VerificarFechaMaxima(time_t extraccion)
 		vencio = true;
 	return vencio;
 }
-
-string Cmedula::to_string()
-{
-	return string();
-}

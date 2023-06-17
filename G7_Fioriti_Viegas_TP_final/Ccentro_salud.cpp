@@ -97,18 +97,14 @@ ostream& operator<<(ostream& out, Ccentro_salud& C)
 
 vector<Cpaciente*> operator+(vector<Cpaciente*>& lista, Cpaciente& C)
 {
-	bool repetido = false;
 	int i = 0;
 	while(i < lista.size()) {
 		if (lista[i] == &C) {
-			repetido = true;
-			cout << "El paciente ya se encuentra en la lista." << endl;
-			break;
+			throw new exception("El paciente ya se encuentra en la lista.");
 		}
 		i++;
 	}
-	if(repetido == false)
-		lista.push_back(&C);
+	lista.push_back(&C);
 	return lista;
 }
 
@@ -123,24 +119,23 @@ vector<Cpaciente*> operator-(vector<Cpaciente*>& lista, Cpaciente& C)
 		i++;
 	}
 	if (lista.size() == i)
-		cout << "No se encontro el paciente que se quiere eliminar" << endl;
+		throw new exception("No se encontro el paciente que se quiere eliminar");
 	return lista;
 }
 
 bool operator==(Creceptor& Cr , Cdonante& Cd)
 {
 	bool compatible = false;
-	if (Cr.get_estado() != 2) {
-		Csangre* sangre = dynamic_cast<Csangre*>(Cd.get_registro()[Cd.get_registro().size()-1]->get_fluido());
-		if(sangre != nullptr)
-			compatible = Cr.verificar_trasfusion(sangre->get_Rh(), sangre->get_tipo());
-		Cmedula* medula = dynamic_cast<Cmedula*>(Cd.get_registro()[Cd.get_registro().size()-1]->get_fluido());
-		if (medula != nullptr)
-			compatible = true;
-		Cplasma* plasma = dynamic_cast<Cplasma*>(Cd.get_registro()[Cd.get_registro().size()-1]->get_fluido());
-		if (plasma == nullptr)
-			compatible = true;
-	}
+	Csangre* donante = dynamic_cast<Csangre*>(Cd.get_sangre());//para acceder a los atributos de Csangre
+	//hago dynamic_cast con todas la posibilidades que podria ser el fluido a donar
+	Csangre* sangreR = dynamic_cast<Csangre*>(Cr.get_necesita());
+	Cmedula* medulaR = dynamic_cast<Cmedula*>(Cr.get_necesita());
+	Cplasma* plasmaR = dynamic_cast<Cplasma*>(Cr.get_necesita());
+	Csangre* sangreD = dynamic_cast<Csangre*>(Cd.get_registro()[Cd.get_registro().size() - 1]->get_fluido());
+	Cmedula* medulaD = dynamic_cast<Cmedula*>(Cd.get_registro()[Cd.get_registro().size() - 1]->get_fluido());
+	Cplasma* plasmaD = dynamic_cast<Cplasma*>(Cd.get_registro()[Cd.get_registro().size() - 1]->get_fluido());
+	if((sangreR != nullptr && sangreD != nullptr) || (medulaR != nullptr && medulaD != nullptr) || (plasmaD != nullptr && plasmaR != nullptr))//veo si el donante tiene el fluido que se precisa
+			compatible = Cr.verificar_trasfusion(donante->get_Rh(), donante->get_tipo()); //verifico si es compatible la sangre ya que esto determina si se puede hacer la trasfusion tanto de medula, del plasma como de la sangre misma
 	return compatible;
 }
 

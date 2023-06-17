@@ -24,8 +24,3 @@ bool Cplasma::VerificarFechaMaxima(time_t extraccion)
 		vencio = true;
 	return vencio;
 }
-
-string Cplasma::to_string()
-{
-	return string();
-}

@@ -7,6 +7,5 @@ public:
 	Cmedula();
 	~Cmedula();
 	bool VerificarFechaMaxima(time_t extraccion);
-	string to_string();
 };
 

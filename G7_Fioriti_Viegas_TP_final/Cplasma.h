@@ -7,6 +7,5 @@ public:
 	Cplasma();
 	~Cplasma();
 	bool VerificarFechaMaxima(time_t extraccion);
-	string to_string();
 };
 

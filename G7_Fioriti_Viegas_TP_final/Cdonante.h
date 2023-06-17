@@ -10,7 +10,7 @@ class Cdonante: public Cpaciente
 	bool enfermedades;
 	bool meses;
 public:
-	Cdonante(unsigned int edad, float peso, bool enfermedades, bool meses, string nombre, string apellido, string telefono, char sexo, string dni, time_t fecha, vector<Cregistro*> registro);
+	Cdonante(unsigned int edad, float peso, bool enfermedades, bool meses, string nombre, string apellido, string telefono, char sexo, string dni, time_t fecha, vector<Cregistro*> registro, Cfluido* sangre);
 	~Cdonante();
 	unsigned int get_edad();
 	float get_peso();

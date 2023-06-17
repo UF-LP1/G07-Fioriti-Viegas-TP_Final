@@ -9,13 +9,13 @@ CBSA::~CBSA()
 {
 }
 
-void CBSA::Buscar_espera(/*string nombre, int provincia, string direccion*/)
+void CBSA::Buscar_espera()
 {
 	int i = 0, j;
 	bool ninguno = true;
 	while(i != this->centros.size()) {
 		j = 0;
-		while(j != this->centros[i]->get_lista().size()) { //de lo contrario, if(this->centros[i]->get_nombre() == nombre && this->centros[i]->get_provincia() == provincia && this->centros[i]->get_direccion == direccion)
+		while(j != this->centros[i]->get_lista().size()) {
 			ninguno = true;
 			Creceptor* receptor = dynamic_cast<Creceptor*>(this->centros[i]->get_lista()[j]);
 			cout << "Centro de salud: " << this->centros[i]->get_nombre() << endl;
@@ -25,7 +25,6 @@ void CBSA::Buscar_espera(/*string nombre, int provincia, string direccion*/)
 					ninguno = false;
 				}
 			j++;
-			delete receptor;
 		}
 		if (ninguno == true)
 			cout << "Ninguno." << endl;
@@ -45,7 +44,6 @@ unsigned int CBSA::buscar_prioridad_receptor(string dni)
 					return receptor->get_prioridad();
 				}
 			j++;
-			delete receptor;
 		}
 		i++;
 	}
@@ -113,7 +111,6 @@ void CBSA::encontrar_donante(unsigned int centro, Creceptor& receptor, unsigned 
 			srand(time(NULL));
 			int aleatorio = rand() % 2;
 			if (donante != nullptr && receptor == *donante) { //con la sobrecarga del operador == verifico la caducidad, que se done lo que se necesita y si es compatible
-				delete donante;
 				if (aleatorio == 1) {
 					this->centros[centro]->recibe(paciente);
 					this->centros[centro]->dono(j);
@@ -222,8 +219,6 @@ void CBSA::donaciones_provincia()
 							acumRioNegro++;
 						else if (p == 23)
 							acumSantiago++;
-				
-					delete receptor;
 				}
 				j++;
 			}
@@ -257,8 +252,6 @@ void CBSA::donaciones_provincia()
 		}
 		h++;
 	}
-	delete ahora;
-	delete recibio;
 }
 
 //param: dni ->dni del pacinete a eliminar
@@ -287,13 +280,16 @@ void CBSA::agregar_donante(Cpaciente& paciente, Ccentro_salud& centro)
 {
 	Cdonante* donante = dynamic_cast<Cdonante*>(&paciente);//como lo paso como paciente, necesito convertirlo a donante
 	int i = 0;
-	if((*donante).get_edad() <= 65 && (*donante).get_edad() >= 18 && (*donante).get_enfermedades() == false && (*donante).get_meses() == false && (*donante).get_peso() >= 50)//verifico los requisitos
-		while(i < this->centros.size()) {//recorro los centros
+	if ((*donante).get_edad() <= 65 && (*donante).get_edad() >= 18 && (*donante).get_enfermedades() == false && (*donante).get_meses() == false && (*donante).get_peso() >= 50) {//verifico los requisitos
+		while (i < this->centros.size()) {//recorro los centros
 			if (this->centros[i]->get_direccion() == centro.get_direccion() && this->centros[i]->get_nombre() == centro.get_nombre() && this->centros[i]->get_provincia() == centro.get_provincia()) {
 				this->centros[i]->agregar_paciente(paciente);//cuando encuentro el centro, agrego al paciente
 			}
 			i++;
 		}
+	}
+	else
+		throw new exception("No puede donar actualmente.");
 		
 }
 
