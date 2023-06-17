@@ -16,8 +16,8 @@ void CBSA::Buscar_espera()
 	while(i != this->centros.size()) {
 		j = 0;
 		cout << "Centro de salud: " << this->centros[i]->get_nombre() << endl;
+		ninguno = true;
 		while(j != this->centros[i]->get_lista().size()) {
-			ninguno = true;
 			Creceptor* receptor = dynamic_cast<Creceptor*>(this->centros[i]->get_lista()[j]);
 			if (receptor != nullptr)
 				if (receptor->get_estado() != 2) {
@@ -34,20 +34,27 @@ void CBSA::Buscar_espera()
 
 unsigned int CBSA::buscar_prioridad_receptor(string dni) 
 {
-	int i = 0, j;
+	int i = 0, j = 0;
+	int prioridad = 0;
+	bool encontrado = false;
 	while(i != this->centros.size()) {
 		j = 0;
 		while(j != this->centros[i]->get_lista().size()) {
 			Creceptor* receptor = dynamic_cast<Creceptor*>(this->centros[i]->get_lista()[j]);
-			if (receptor != nullptr)
-				if (receptor->get_dni() == dni) {
-					return receptor->get_prioridad();
-				}
+			if (receptor != nullptr && receptor->get_dni() == dni){
+				prioridad = receptor->get_prioridad();
+				encontrado = true;
+				break;
+			}
 			j++;
 		}
 		i++;
+		if (encontrado == true)
+			break;
 	}
-	return 0;
+	if (i == this->centros.size() && j == this->centros[i]->get_lista().size())
+		cout << "No se encontro el receptor." << endl;
+	return prioridad;
 }
 
 void CBSA::imprimir()
@@ -75,7 +82,7 @@ void CBSA::empezar_transfusion()
 		j = 0;
 		while (j < this->centros[i]->get_lista().size()) {
 			Creceptor* receptor = dynamic_cast<Creceptor*>(this->centros[i]->get_lista()[j]);
-			if (receptor != nullptr && i == 0 && j == 0) {
+			if (receptor != nullptr && prioridad == nullptr ) {
 				prioridad = receptor;
 			}
 			else if (receptor != nullptr && receptor->get_prioridad() > prioridad->get_prioridad()) {
@@ -93,34 +100,45 @@ void CBSA::empezar_transfusion()
 		}
 		i++;
 	}
-	encontrar_donante(centro, *prioridad, paciente);
+	if (prioridad != nullptr) {
+		try {
+			encontrar_donante(centro, *prioridad, paciente);
+		}catch (exception* e) {
+			throw e;
+		}
+	}
+	else
+		throw new exception("No hay receptores aun.");
 }
 
 void CBSA::encontrar_donante(unsigned int centro, Creceptor& receptor, unsigned int paciente)
 {
-	int i = 0, j;
+	int i = 0, j = 0;
 	
 	while (i < this->centros.size())
 	{
-		if (this->centros[centro]->get_provincia() == this->centros[i]->get_provincia())
+		if (this->centros[centro]->get_provincia() == this->centros[i]->get_provincia()) {
 			j = 0;
-		while (j < this->centros[i]->get_lista().size()) {
-			Cdonante* donante = dynamic_cast<Cdonante*>(this->centros[i]->get_lista()[j]);
-			srand(time(NULL));
-			int aleatorio = rand() % 2;
-			if (donante != nullptr && receptor == *donante) { //con la sobrecarga del operador == verifico la caducidad, que se done lo que se necesita y si es compatible
-				if (aleatorio == 1) {
-					this->centros[centro]->recibe(paciente);
-					this->centros[centro]->dono(j);
-					break;
+			while (j < this->centros[i]->get_lista().size()) {
+				Cdonante* donante = dynamic_cast<Cdonante*>(this->centros[i]->get_lista()[j]);
+				if (donante != nullptr && receptor == *donante) { //con la sobrecarga del operador == verifico la caducidad, que se done lo que se necesita y si es compatible
+					srand(time(NULL));
+					int aleatorio = rand() % 2;
+					if (aleatorio == 1) {
+						this->centros[centro]->recibe(paciente);
+						this->centros[centro]->dono(j);
+						break;
+					}
+					else
+						throw new exception("Transfusion fallida!!");
 				}
-				else
-					throw new exception("Transfusion fallida!!");
+				j++;
 			}
-			j++;
 		}
 		i++;
 	}
+	if (i == this->centros.size() && j == this->centros[i]->get_lista().size())
+		throw new exception("No existe un donante apropiado para el receptor.");
 }
 
 
@@ -282,6 +300,7 @@ void CBSA::agregar_donante(Cpaciente& paciente, Ccentro_salud& centro)
 		while (i < this->centros.size()) {//recorro los centros
 			if (this->centros[i]->get_direccion() == centro.get_direccion() && this->centros[i]->get_nombre() == centro.get_nombre() && this->centros[i]->get_provincia() == centro.get_provincia()) {
 				this->centros[i]->agregar_paciente(paciente);//cuando encuentro el centro, agrego al paciente
+				break;
 			}
 			i++;
 		}

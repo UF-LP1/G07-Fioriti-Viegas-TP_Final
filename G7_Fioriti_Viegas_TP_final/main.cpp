@@ -112,14 +112,14 @@ int main() {
 
 	Ccentro_salud Favaloro("Hospital Favaloro", "Entre Rios 2923", "CABA", CABA, "17262537832", pacientesFava);
 	Ccentro_salud mendoza("Clinica Mendo", "Cabral 871", "San Rafael", Mendoza, "73246638859", pacientesMendoza);
-	//Ccentro_salud BsAs("Hospital Pquenia familia", "Avenida de Mayo 5213", "Junin", BsAs, "76834672372", pacientesBsAs);
+	Ccentro_salud bsas("Hospital Pequenia familia", "Avenida de Mayo 5213", "Junin", BsAs, "76834672372", pacientesBsAs);
 	Ccentro_salud chubut("Hospital Austral", "Carlos Gardel 366", "Comodoro Rivadavia", Chubut, "87457867232", pacientesChubut);
 	Ccentro_salud sanLuis("Hospital Luisito", "Juan Labrada 821", "Villa Mercedes", San_Luis, "78362875623", pacientesSanLuis);
 
 	vector<Ccentro_salud*> centros_salud;
 	centros_salud + Favaloro;
 	centros_salud + mendoza;
-	//centros_salud + BsAs;
+	centros_salud + bsas;
 	centros_salud + chubut;
 	centros_salud + sanLuis;
 
@@ -134,11 +134,27 @@ int main() {
 
 	Cdonante mariano(19, 85, false, false, "Mariano", "Viegas Bordeira", "8234652774", 'm', "45413782", 1071943854, registrodonante, sangreM);
 	Creceptor lebron(1685643218, estable, "LeBron Raymone", "James Sr", "8273467389", "40328746", 'm', 473278599, sangreL,sangreL);
-/*
-	BSA.agregar_donante(mariano, chubut);
-	BSA.agregar_receptor(lebron, Favaloro);
-*/
-	BSA.Buscar_espera();
+	try {
+		BSA.agregar_donante(mariano, chubut);//agrego al donante nuevo
+	}catch (exception* e) {
+		cout << e->what() << endl;
+		delete e;
+	}
+	try {
+		BSA.agregar_receptor(lebron, Favaloro);//agrego al receptor nuevo
+	}catch (exception* e) {
+		cout << e->what() << endl;
+		delete e;
+	}
+
+	cout << "El paciente con dni 45474635 tiene una prioridad de " << BSA.buscar_prioridad_receptor("45522914") << " en una escala de 0 a 5." << endl;
+
+	try {
+		BSA.empezar_transfusion();
+	}catch (exception* e) {
+		cout << e->what() << endl;
+	}
+	BSA.Buscar_espera();//imprimo la lista de espera
 	
 	delete facu;
 	delete sangreM;
@@ -151,6 +167,6 @@ int main() {
 	delete sangre6;
 	delete sangre7;
 	delete sangre8;
-	//delete medula;
-	//delete plasma; 
+	delete medula;
+	delete plasma; 
 }

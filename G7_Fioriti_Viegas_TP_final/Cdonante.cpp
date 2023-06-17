@@ -1,6 +1,6 @@
 #include "Cdonante.h"
 
-Cdonante::Cdonante(unsigned int edad, float peso, bool enfermedades, bool meses, string nombre, string apellido, string telefono, char sexo, string dni, time_t fecha, vector<Cregistro*> registro, Cfluido* sangre):Cpaciente(nombre,apellido,fecha,sexo,telefono,dni, sangre)
+Cdonante::Cdonante(unsigned int edad, double peso, bool enfermedades, bool meses, string nombre, string apellido, string telefono, char sexo, string dni, time_t fecha, vector<Cregistro*> registro, Cfluido* sangre):Cpaciente(nombre,apellido,fecha,sexo,telefono,dni, sangre)
 {
 	this->registro = registro;
 	this->edad = edad;
@@ -18,7 +18,7 @@ unsigned int Cdonante::get_edad()
 	return this->edad;
 }
 
-float Cdonante::get_peso()
+double Cdonante::get_peso()
 {
 	return this->peso;
 }
@@ -51,17 +51,16 @@ void Cdonante::nuevo_registro()
 
 bool Cdonante::VerificarFechaMax()
 {
-	int i = this->registro.size() - 1;
 	bool enCondiciones = false;
-	Csangre* sangre = dynamic_cast<Csangre*>(this->registro[i]->get_fluido());
+	Csangre* sangre = dynamic_cast<Csangre*>(this->registro[this->registro.size() - 1]->get_fluido());
 	if (sangre != nullptr)
-		enCondiciones = sangre->VerificarFechaMaxima(this->registro[i]->get_fecha_extraccion());
-	Cplasma* plasma = dynamic_cast<Cplasma*>(this->registro[i]->get_fluido());
+		enCondiciones = sangre->VerificarFechaMaxima(this->registro[this->registro.size() - 1]->get_fecha_extraccion());
+	Cplasma* plasma = dynamic_cast<Cplasma*>(this->registro[this->registro.size() - 1]->get_fluido());
 	if (plasma != nullptr)
-		enCondiciones = plasma->VerificarFechaMaxima(this->registro[i]->get_fecha_extraccion());
-	Cmedula* medula = dynamic_cast<Cmedula*>(this->registro[i]->get_fluido());
+		enCondiciones = plasma->VerificarFechaMaxima(this->registro[this->registro.size() - 1]->get_fecha_extraccion());
+	Cmedula* medula = dynamic_cast<Cmedula*>(this->registro[this->registro.size() - 1]->get_fluido());
 	if (medula != nullptr)
-		enCondiciones = medula->VerificarFechaMaxima(this->registro[i]->get_fecha_extraccion());
+		enCondiciones = medula->VerificarFechaMaxima(this->registro[this->registro.size() - 1]->get_fecha_extraccion());
 	return enCondiciones;
 }
 

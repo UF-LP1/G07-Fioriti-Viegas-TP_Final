@@ -1,6 +1,6 @@
 #include "Cregistro.h"
 
-Cregistro::Cregistro(time_t fecha_extraccion, float volumen, Cfluido& fluido)
+Cregistro::Cregistro(time_t fecha_extraccion, double volumen, Cfluido& fluido)
 {
 	this->fecha_extraccion = fecha_extraccion;
 	this->volumen = volumen;
@@ -48,7 +48,7 @@ void Cregistro::set_fluido(Cfluido* fluido)
 	this->fluido = fluido;
 }
 
-void Cregistro::set_volumen(float volumen)
+void Cregistro::set_volumen(double volumen)
 {
 	this->volumen = volumen;
 }

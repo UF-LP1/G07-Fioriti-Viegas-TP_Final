@@ -68,7 +68,7 @@ string Creceptor::to_string()
 	tm* espera = new tm;
 	localtime_s(espera, &this->fecha_ingreso);
 	out << "Los datos del receptor son: " << endl;
-	out << "Nombre y apellido: " << this->apellido << ", " << this->nombre << endl;
+	out << "Nombre: " << this->apellido << ", " << this->nombre << endl;
 	out << "Nacimiento: " << nacer->tm_mday << "/" << nacer->tm_mon + 1 << "/" << nacer->tm_year + 1900 << endl;
 	out << "Sexo: " << this->sexo << endl;
 	out << "DNI: " << this->dni << endl;
