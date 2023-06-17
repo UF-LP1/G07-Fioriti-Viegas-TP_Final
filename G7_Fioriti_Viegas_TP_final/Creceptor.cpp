@@ -26,16 +26,9 @@ Creceptor::Creceptor(time_t fecha_ingreso, time_t* recibio, estados estado, stri
 	this->estado = estado;
 	this->recibio = recibio;
 	this->necesita = necesita;
-	this->apellido = apellido;
-	this->dni = dni;
-	this->fecha = fecha;
-	this->nombre = nombre;
-	this->sangre = sangre;
-	this->sexo = sexo;
-	this->telefono = telefono;
 }
 
-Creceptor::Creceptor(time_t fecha_ingreso, estados estado, string nombre, string apellido, string telefono, string dni, char sexo, time_t fecha, Cfluido* necesita, Cfluido* sangre)
+Creceptor::Creceptor(time_t fecha_ingreso, estados estado, string nombre, string apellido, string telefono, string dni, char sexo, time_t fecha, Cfluido* necesita, Cfluido* sangre):Cpaciente(nombre,apellido,fecha,sexo,telefono,dni,sangre)
 {
 		unsigned int acum = 0;
 		time_t diferencia;
@@ -69,15 +62,23 @@ Creceptor::~Creceptor()
 
 string Creceptor::to_string()
 {
-	stringstream salida;
+	stringstream out;
 	tm* nacer = new tm;
 	localtime_s(nacer, &this->fecha);
 	tm* espera = new tm;
 	localtime_s(espera, &this->fecha_ingreso);
-	salida << "Los datos del receptor son: " << endl << "Nombre y apellido: " << this->apellido  << ", " << this->nombre << endl << "Nacimiento: " << nacer->tm_mday << "/" << nacer->tm_mon + 1 << "/" << nacer->tm_year + 1900 << endl << "Sexo: " << this->sexo << endl << "DNI: " << this->dni << endl << "Telefono: " << this->telefono << endl << "Fecha de espera: " << espera->tm_mday << "/" << espera->tm_mon + 1 << "/" << espera->tm_year + 1900 << endl << "Prioridad: " << this->prioridad << endl << "Estado: " << this->estado << endl;
+	out << "Los datos del receptor son: " << endl;
+	out << "Nombre y apellido: " << this->apellido << ", " << this->nombre << endl;
+	out << "Nacimiento: " << nacer->tm_mday << "/" << nacer->tm_mon + 1 << "/" << nacer->tm_year + 1900 << endl;
+	out << "Sexo: " << this->sexo << endl;
+	out << "DNI: " << this->dni << endl;
+	out << "Telefono: " << this->telefono << endl;
+	out << "Fecha de espera: " << espera->tm_mday << "/" << espera->tm_mon + 1 << "/" << espera->tm_year + 1900 << endl;
+	out << "Prioridad: " << this->prioridad << endl;
+	out << "Estado: " << this->estado << endl;
 	delete espera;
 	delete nacer;
-	return salida.str();
+	return out.str();
 }
 
 void Creceptor::imprimir()

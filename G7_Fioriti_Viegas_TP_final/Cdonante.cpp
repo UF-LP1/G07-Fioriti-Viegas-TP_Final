@@ -76,7 +76,16 @@ string Cdonante::to_string()
 		espera = "Si";
 	tm* nacer = new tm;
 	localtime_s(nacer, &this->fecha);
-	salida << "Los datos del donante son: " << endl << "Nombre y apellido: " << this->nombre << this->apellido << endl << "Nacimiento: " << nacer->tm_mday << "/" << nacer->tm_mon + 1 << "/" << nacer->tm_year + 1900 << endl << "Sexo: " << this->sexo << endl << "DNI: " << this->dni << endl << "Edad: " << this->edad << endl << "Peso: " << this->peso << endl << "Telefono: " << this->telefono << endl << "Enfermedades de transmicion sanguinea?: " << enfermedad << endl << "Se tatuo o dono sangre en los ultimos 2 meses?: " << espera << endl;
+	salida << "Los datos del donante son: " << endl;
+	salida << "Nombre y apellido: " << this->nombre << this->apellido << endl;
+	salida << "Nacimiento: " << nacer->tm_mday << "/" << nacer->tm_mon + 1 << "/" << nacer->tm_year + 1900 << endl;
+	salida << "Sexo: " << this->sexo << endl;
+	salida << "DNI: " << this->dni << endl;
+	salida << "Edad: " << this->edad << endl;
+	salida << "Peso: " << this->peso << endl;
+	salida << "Telefono: " << this->telefono << endl;
+	salida << "Enfermedades de transmicion sanguinea?: " << enfermedad << endl;
+	salida << "Se tatuo o dono sangre en los ultimos 2 meses?: " << espera << endl;
 	delete nacer;
 	return string();
 }
