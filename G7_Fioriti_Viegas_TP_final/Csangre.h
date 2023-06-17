@@ -14,7 +14,6 @@ public:
 	bool VerificarFechaMaxima(time_t extraccion);
 	char get_Rh();
 	tipo_sangre get_tipo();
-	char get_Rh();
 	friend ostream& operator<<(ostream& out, Csangre& C);
 };
 

@@ -15,13 +15,13 @@ void CBSA::Buscar_espera()
 	bool ninguno = true;
 	while(i != this->centros.size()) {
 		j = 0;
+		cout << "Centro de salud: " << this->centros[i]->get_nombre() << endl;
 		while(j != this->centros[i]->get_lista().size()) {
 			ninguno = true;
 			Creceptor* receptor = dynamic_cast<Creceptor*>(this->centros[i]->get_lista()[j]);
-			cout << "Centro de salud: " << this->centros[i]->get_nombre() << endl;
 			if (receptor != nullptr)
 				if (receptor->get_estado() != 2) {
-					cout << receptor;
+					cout << *receptor;
 					ninguno = false;
 				}
 			j++;
@@ -69,16 +69,14 @@ string CBSA::to_string()
 
 void CBSA::empezar_transfusion()
 {
-	int i = 0, j, centro, paciente;
-	Creceptor* prioridad = new Creceptor();
+	int i = 0, j, centro = 0, paciente = 0;
+	Creceptor* prioridad = nullptr;
 	while (i < this->centros.size()) {
 		j = 0;
 		while (j < this->centros[i]->get_lista().size()) {
 			Creceptor* receptor = dynamic_cast<Creceptor*>(this->centros[i]->get_lista()[j]);
 			if (receptor != nullptr && i == 0 && j == 0) {
 				prioridad = receptor;
-				centro = 0;
-				paciente = 0;
 			}
 			else if (receptor != nullptr && receptor->get_prioridad() > prioridad->get_prioridad()) {
 				prioridad = receptor;
@@ -133,7 +131,7 @@ void CBSA::donaciones_provincia()
 	tm* recibio = new tm; //guarda en formato de estructura la fecha en la que recibio la donacion
 	time_t now = time(NULL);//obtengo la fecha actual en segundos
 	tm* ahora = new tm;
-	ahora = localtime(&now);//convierto now a tm y lo guardo en ahora
+	localtime_s(ahora,&now);//convierto now a tm y lo guardo en ahora
 	int h = 0, i, j;
 	while (h < ahora->tm_mon + 1) {//se repite hasta el mes actual
 		cout << "Mes " << h + 1 << endl;
@@ -168,7 +166,7 @@ void CBSA::donaciones_provincia()
 			j = 0;
 			while (j < this->centros[i]->get_lista().size()) {//recorro la lista de pacientes
 				Creceptor* receptor = dynamic_cast<Creceptor*>(this->centros[i]->get_lista()[j]);
-				recibio = localtime(receptor->get_recibio());//paso a tm* la fecha de la transfusion
+				localtime_s(recibio, receptor->get_recibio());//paso a tm* la fecha de la transfusion
 				if (receptor != nullptr && receptor->get_estado() == 2 && recibio->tm_year == ahora->tm_year && recibio->tm_mon == h) { //verifico que recibio y que haya pasado en el mes correspondiente del anio actual
 					//se suma a la cantidad de doinaciones en la provincia correspondiente
 						if (p == 0)
@@ -307,6 +305,7 @@ void CBSA::agregar_receptor(Cpaciente& receptor, Ccentro_salud& centro)
 ostream& operator<<(ostream& out, CBSA& C)
 {
 	out << C.to_string() << endl;//imprimo el banco de sangre
+	return out;
 }
 
 vector<Ccentro_salud*> operator+(vector<Ccentro_salud*>& lista, Ccentro_salud& C)

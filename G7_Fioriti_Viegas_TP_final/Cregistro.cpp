@@ -9,6 +9,9 @@ Cregistro::Cregistro(time_t fecha_extraccion, float volumen, Cfluido& fluido)
 
 Cregistro::Cregistro()
 {
+	this->fecha_extraccion = 0;
+	this->fluido = nullptr;
+	this->volumen = 0;
 }
 
 Cregistro::~Cregistro()
@@ -18,9 +21,11 @@ Cregistro::~Cregistro()
 string Cregistro::to_string()
 {
 	stringstream salida;
-	tm* fecha = localtime(&this->fecha_extraccion);
+	tm* fecha = new tm;
+	localtime_s(fecha, &this->fecha_extraccion);
 	salida << "Fecha de extraccion del fluido: " << fecha->tm_mday << "/" << fecha->tm_mon + 1 << "/" << fecha->tm_year + 1900 << endl << this->volumen << "ml" << endl;
-	return ;
+	delete fecha;
+	return salida.str();
 }
 
 void Cregistro::imprimir()
