@@ -126,19 +126,18 @@ void CBSA::encontrar_donante(unsigned int centro, Creceptor& receptor, unsigned 
 					int aleatorio = rand() % 2;
 					if (aleatorio == 1) {
 						this->centros[centro]->recibe(paciente);
-						this->centros[centro]->dono(j);
+						this->centros[i]->dono(j);
 						break;
 					}
-					else
+					else if(aleatorio == 0){
 						throw new exception("Transfusion fallida!!");
+					}
 				}
 				j++;
 			}
 		}
 		i++;
 	}
-	if (i == this->centros.size() && j == this->centros[i]->get_lista().size())
-		throw new exception("No existe un donante apropiado para el receptor.");
 }
 
 
