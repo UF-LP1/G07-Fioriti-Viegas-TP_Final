@@ -92,8 +92,8 @@ int main() {
 	pacientesMendoza + liliana;
 
 	Cdonante isabella(19, 60, false, false, "isabella", "ferrari", "23726575889", 'f', "45474635", 1078066714, registroFava, sangre4);
-	Creceptor emilia(1685631856, inestable, "emilia", "janin", "82346546325", "45522914", 'f', 1073055965, medula, sangre7);
-	Creceptor pedro(1685631856, inestable, "federico", "fioriti", "82346546325", "45522914", 'm', 1073055965, sangre8, sangre8);
+	Creceptor emilia(1685631856, inestable, "emilia", "janin", "82346546325", "45522914", 'f', 1073055965, sangre8, sangre8);
+	Creceptor pedro(1685631856, inestable, "federico", "fioriti", "82346546325", "45522914", 'm', 1073055965, medula, sangre7);
 	Creceptor serafin(1685631856, inestable, "serafin", "quesada", "82346546325", "45522914", 'm', 1073055965, plasma, sangre1);
 	pacientesFava + isabella;
 	pacientesFava + emilia;
@@ -153,8 +153,11 @@ int main() {
 		BSA.empezar_transfusion();
 	}catch (exception* e) {
 		cout << e->what() << endl;
+		delete e;
 	}
 	BSA.Buscar_espera();//imprimo la lista de espera
+	system("CLS");
+	BSA.donaciones_provincia();
 	
 	delete facu;
 	delete sangreM;

@@ -63,6 +63,12 @@ void Ccentro_salud::ordenarPaciente()
 {
 }
 
+void Ccentro_salud::grave(unsigned int pos)
+{
+	Creceptor* receptor = dynamic_cast<Creceptor*>(this->get_lista()[pos]);
+	receptor->set_prioridad(6);//es la prioridad unica mas alta
+}
+
 void Ccentro_salud::recibe(unsigned int receptor)
 {
 	Creceptor* paciente = dynamic_cast<Creceptor*>(this->pacientes[receptor]);

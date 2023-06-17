@@ -28,6 +28,7 @@ public:
 	provincias get_provincia();
 	vector<Cpaciente*> get_lista();
 	void ordenarPaciente();
+	void grave(unsigned int pos);
 	void recibe(unsigned int receptor);
 	void dono(unsigned int donante);
 	void agregar_paciente(Cpaciente& paciente);

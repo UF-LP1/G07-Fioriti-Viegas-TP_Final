@@ -10,7 +10,6 @@ class Creceptor: public Cpaciente
 	estados estado;
 	Cfluido* necesita;
 public:
-	Creceptor();
 	Creceptor(time_t fecha_ingreso,time_t* recibio, estados estado, string nombre, string apellido, string telefono, string dni, char sexo, time_t fecha, Cfluido* necesita, Cfluido* sangre);
 	Creceptor(time_t fecha_ingreso, estados estado, string nombre, string apellido, string telefono, string dni, char sexo, time_t fecha, Cfluido* necesita, Cfluido* sangre);
 	~Creceptor();

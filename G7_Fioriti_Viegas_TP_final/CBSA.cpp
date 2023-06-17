@@ -15,19 +15,19 @@ void CBSA::Buscar_espera()
 	bool ninguno = true;
 	while(i != this->centros.size()) {
 		j = 0;
-		cout << "Centro de salud: " << this->centros[i]->get_nombre() << endl;
+		std::cout << "Centro de salud: " << this->centros[i]->get_nombre() << endl;
 		ninguno = true;
 		while(j != this->centros[i]->get_lista().size()) {
 			Creceptor* receptor = dynamic_cast<Creceptor*>(this->centros[i]->get_lista()[j]);
 			if (receptor != nullptr)
 				if (receptor->get_estado() != 2) {
-					cout << *receptor;
+					std::cout << *receptor;
 					ninguno = false;
 				}
 			j++;
 		}
 		if (ninguno == true)
-			cout << "Ninguno." << endl;
+			std::cout << "Ninguno." << endl;
 		i++;
 	}
 }
@@ -53,13 +53,13 @@ unsigned int CBSA::buscar_prioridad_receptor(string dni)
 			break;
 	}
 	if (i == this->centros.size() && j == this->centros[i]->get_lista().size())
-		cout << "No se encontro el receptor." << endl;
+		std::cout << "No se encontro el receptor." << endl;
 	return prioridad;
 }
 
 void CBSA::imprimir()
 {
-	cout << this->to_string() << endl;
+	std::cout << this->to_string() << endl;
 }
 
 string CBSA::to_string()
@@ -84,6 +84,8 @@ void CBSA::empezar_transfusion()
 			Creceptor* receptor = dynamic_cast<Creceptor*>(this->centros[i]->get_lista()[j]);
 			if (receptor != nullptr && prioridad == nullptr ) {
 				prioridad = receptor;
+				centro = i;
+				paciente = j;
 			}
 			else if (receptor != nullptr && receptor->get_prioridad() > prioridad->get_prioridad()) {
 				prioridad = receptor;
@@ -114,10 +116,9 @@ void CBSA::empezar_transfusion()
 void CBSA::encontrar_donante(unsigned int centro, Creceptor& receptor, unsigned int paciente)
 {
 	int i = 0, j = 0;
-	
 	while (i < this->centros.size())
 	{
-		if (this->centros[centro]->get_provincia() == this->centros[i]->get_provincia()) {
+		if (this->centros[centro]->get_provincia() == this->centros[i]->get_provincia() && this->centros[centro]->get_partido() == this->centros[i]->get_partido()) {
 			j = 0;
 			while (j < this->centros[i]->get_lista().size()) {
 				Cdonante* donante = dynamic_cast<Cdonante*>(this->centros[i]->get_lista()[j]);
@@ -130,6 +131,7 @@ void CBSA::encontrar_donante(unsigned int centro, Creceptor& receptor, unsigned 
 						break;
 					}
 					else if(aleatorio == 0){
+						this->centros[centro]->grave(paciente);
 						throw new exception("Transfusion fallida!!");
 					}
 				}
@@ -151,7 +153,7 @@ void CBSA::donaciones_provincia()
 	localtime_s(ahora,&now);//convierto now a tm y lo guardo en ahora
 	int h = 0, i, j;
 	while (h < ahora->tm_mon + 1) {//se repite hasta el mes actual
-		cout << "Mes " << h + 1 << endl;
+		std::cout << "Mes " << h + 1 << endl;
 		//igualo acumuladores a 0
 		acumCABA = 0;
 		acumBsAs = 0;
@@ -183,9 +185,10 @@ void CBSA::donaciones_provincia()
 			j = 0;
 			while (j < this->centros[i]->get_lista().size()) {//recorro la lista de pacientes
 				Creceptor* receptor = dynamic_cast<Creceptor*>(this->centros[i]->get_lista()[j]);
-				localtime_s(recibio, receptor->get_recibio());//paso a tm* la fecha de la transfusion
-				if (receptor != nullptr && receptor->get_estado() == 2 && recibio->tm_year == ahora->tm_year && recibio->tm_mon == h) { //verifico que recibio y que haya pasado en el mes correspondiente del anio actual
-					//se suma a la cantidad de doinaciones en la provincia correspondiente
+				if (receptor != nullptr && receptor->get_recibio() != nullptr) {
+					localtime_s(recibio, receptor->get_recibio());//paso a tm* la fecha de la transfusion
+					if (receptor->get_estado() == 2 && recibio->tm_year == ahora->tm_year && recibio->tm_mon == h) { //verifico que recibio y que haya pasado en el mes correspondiente del anio actual
+						//se suma a la cantidad de doinaciones en la provincia correspondiente
 						if (p == 0)
 							acumJujuy++;
 						else if (p == 1)
@@ -234,37 +237,38 @@ void CBSA::donaciones_provincia()
 							acumRioNegro++;
 						else if (p == 23)
 							acumSantiago++;
+					}
 				}
 				j++;
 			}
-			//imprimo los resultados del mes correspondiente
-			cout << "Donantes en: " << endl;
-			cout << "Jujuy: " << acumJujuy << endl;
-			cout << "Salta: " << acumSalta << endl;
-			cout << "Formosa: " << acumFormosa << endl;
-			cout << "Tucuman: " << acumTucuman << endl;
-			cout << "Misiones: " << acumMisiones << endl;
-			cout << "San Luis: " << acumSanLuis << endl;
-			cout << "San Juan: " << acumSanJuan << endl;
-			cout << "Mendoza: " << acumMendoza << endl;
-			cout << "Cordoba: " << acumCordoba << endl;
-			cout << "Corrientes: " << acumCorrientes << endl;
-			cout << "Entre Rios: " << acumEntreRios << endl;
-			cout << "Bs As: " << acumBsAs << endl;
-			cout << "CABA: " << acumCABA << endl;
-			cout << "Neuquen: " << acumNeuquen << endl;
-			cout << "La Pampa: " << acumLaPampa << endl;
-			cout << "Santa Cruz: " << acumSantCruz << endl;
-			cout << "Chubut: " << acumChubut << endl;
-			cout << "Tierra del Fuego: " << acumTierraDelFuego << endl;
-			cout << "La Rioja: " << acumLaRioja << endl;
-			cout << "Chaco: " << acumChaco << endl;
-			cout << "Santa Fe: " << acumSantaFe << endl;
-			cout << "Catamarca: " << acumCatamarca << endl;
-			cout << "Rio Negro: " << acumRioNegro << endl;
-			cout << "Santiago del Estero: " << acumSantiago << endl;
 			i++;
 		}
+		//imprimo los resultados del mes correspondiente
+		std::cout << "Donantes en: " << endl;
+		std::cout << "Jujuy: " << acumJujuy << endl;
+		std::cout << "Salta: " << acumSalta << endl;
+		std::cout << "Formosa: " << acumFormosa << endl;
+		std::cout << "Tucuman: " << acumTucuman << endl;
+		std::cout << "Misiones: " << acumMisiones << endl;
+		std::cout << "San Luis: " << acumSanLuis << endl;
+		std::cout << "San Juan: " << acumSanJuan << endl;
+		std::cout << "Mendoza: " << acumMendoza << endl;
+		std::cout << "Cordoba: " << acumCordoba << endl;
+		std::cout << "Corrientes: " << acumCorrientes << endl;
+		std::cout << "Entre Rios: " << acumEntreRios << endl;
+		std::cout << "Bs As: " << acumBsAs << endl;
+		std::cout << "CABA: " << acumCABA << endl;
+		std::cout << "Neuquen: " << acumNeuquen << endl;
+		std::cout << "La Pampa: " << acumLaPampa << endl;
+		std::cout << "Santa Cruz: " << acumSantCruz << endl;
+		std::cout << "Chubut: " << acumChubut << endl;
+		std::cout << "Tierra del Fuego: " << acumTierraDelFuego << endl;
+		std::cout << "La Rioja: " << acumLaRioja << endl;
+		std::cout << "Chaco: " << acumChaco << endl;
+		std::cout << "Santa Fe: " << acumSantaFe << endl;
+		std::cout << "Catamarca: " << acumCatamarca << endl;
+		std::cout << "Rio Negro: " << acumRioNegro << endl;
+		std::cout << "Santiago del Estero: " << acumSantiago << endl;
 		h++;
 	}
 }
@@ -342,6 +346,6 @@ vector<Ccentro_salud*> operator-(vector<Ccentro_salud*>& lista, Ccentro_salud& C
 			i++;
 		}
 	if (lista.size() == i)
-		cout << "No se encontro el centro de salud que se quiere eliminar" << endl;
+		std::cout << "No se encontro el centro de salud que se quiere eliminar" << endl;
 	return lista;
 }
