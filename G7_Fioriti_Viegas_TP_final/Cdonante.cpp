@@ -43,6 +43,11 @@ void Cdonante::set_meses(bool meses)
 	this->meses = meses;
 }
 
+void Cdonante::set_registro(Cregistro& registro)
+{
+	this->registro[0] = &registro;
+}
+
 void Cdonante::nuevo_registro()
 {
 	Cregistro* nuevo = new Cregistro();
@@ -86,7 +91,7 @@ string Cdonante::to_string()
 	salida << "Enfermedades de transmicion sanguinea?: " << enfermedad << endl;
 	salida << "Se tatuo o dono sangre en los ultimos 2 meses?: " << espera << endl;
 	delete nacer;
-	return string();
+	return salida.str();
 }
 
 void Cdonante::imprimir()

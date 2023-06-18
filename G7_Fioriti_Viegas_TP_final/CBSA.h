@@ -24,3 +24,5 @@ public:
 };
 vector<Ccentro_salud*> operator+(vector<Ccentro_salud*>& lista, Ccentro_salud& C);
 vector<Ccentro_salud*> operator-(vector<Ccentro_salud*>& lista, Ccentro_salud& C);
+bool operator==(Ccentro_salud& centro, Cpaciente& r);
+bool operator!=(Ccentro_salud& centro, Cpaciente& r);

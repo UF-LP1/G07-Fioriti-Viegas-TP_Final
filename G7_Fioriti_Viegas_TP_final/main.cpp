@@ -23,41 +23,41 @@ int main()
 	Cmedula* medula = new Cmedula();
 
 	vector<Cregistro*>registroSanLuis;
-	Cregistro registro1SL(1684350560, 1.6, *sangre1);
-	Cregistro registro2SL(1679599437, 0.4, *medula);
-	Cregistro registro3SL(1675020267, 0.9, *plasma);
+	Cregistro registro1SL(1684350560, 450, *sangre1);
+	Cregistro registro2SL(1679599437, 5, *medula);
+	Cregistro registro3SL(1675020267, 600, *plasma);
 	registroSanLuis.push_back(&registro1SL);
 	registroSanLuis.push_back(&registro2SL);
 	registroSanLuis.push_back(&registro3SL);
 
 	vector<Cregistro*>registroBsAs;
-	Cregistro registro1BSAS(1675538711, 1.1, *sangre2);
-	Cregistro registro2BSAS(1675538711, 1.4, *medula);
-	Cregistro registro3BSAS(1669749977, 0.7, *plasma);
+	Cregistro registro1BSAS(1675538711, 450, *sangre2);
+	Cregistro registro2BSAS(1675538711, 5, *medula);
+	Cregistro registro3BSAS(1669749977, 160, *plasma);
 	registroBsAs.push_back(&registro1BSAS);
 	registroBsAs.push_back(&registro2BSAS);
 	registroBsAs.push_back(&registro3BSAS);
 
 	vector<Cregistro*>registroChubut;
-	Cregistro registro1CH(1685820410, 1.4, *plasma);
-	Cregistro registro2CH(1686079643, 0.2, *medula);
-	Cregistro registro3CH(1685216118, 3.2, *sangre3);
+	Cregistro registro1CH(1685820410, 160, *plasma);
+	Cregistro registro2CH(1686079643, 5, *medula);
+	Cregistro registro3CH(1685216118, 450, *sangre3);
 	registroChubut.push_back(&registro1CH);
 	registroChubut.push_back(&registro2CH);
 	registroChubut.push_back(&registro3CH);
 
 	vector<Cregistro*>registroFavaloro;
-	Cregistro registro1FA(1678390123, 1.7, *plasma);
-	Cregistro registro2FA(1672601355, 1.4, *medula);
-	Cregistro registro3FA(1668285446, 0.7, *sangre4);
+	Cregistro registro1FA(1678390123, 600, *plasma);
+	Cregistro registro2FA(1672601355, 5, *medula);
+	Cregistro registro3FA(1668285446, 450, *sangre4);
 	registroFavaloro.push_back(&registro1FA);
 	registroFavaloro.push_back(&registro2FA);
 	registroFavaloro.push_back(&registro3FA);
 
 	vector<Cregistro*>registroMendoza;
-	Cregistro registro1ME(1702063839, 2.4, *sangre5);
-	Cregistro registro2ME(1665603073, 0.3, *medula);
-	Cregistro registro3ME(1663961665, 1.2, *plasma);
+	Cregistro registro1ME(1702063839, 450, *sangre5);
+	Cregistro registro2ME(1665603073, 5, *medula);
+	Cregistro registro3ME(1663961665, 600, *plasma);
 	registroMendoza.push_back(&registro1ME);
 	registroMendoza.push_back(&registro2ME);
 	registroMendoza.push_back(&registro3ME);
@@ -127,14 +127,14 @@ int main()
 
 	Ccentro_salud Favaloro("Hospital Favaloro", "Entre Rios 2923", "CABA", CABA, "17262537832", pacientesFavaloro);
 	Ccentro_salud mendoza("Clinica Mendo", "Cabral 871", "San Rafael", Mendoza, "73246638859", pacientesMendoza);
-	Ccentro_salud BsAs("Hospital Pequenia familia", "Avenida de Mayo 5213", "Junin", BsAs, "76834672372", pacientesBsAs);
+	//Ccentro_salud BsAs("Hospital Pequenia familia", "Avenida de Mayo 5213", "Junin", BsAs, "76834672372", pacientesBsAs);
 	Ccentro_salud chubut("Hospital Austral", "Carlos Gardel 366", "Comodoro Rivadavia", Chubut, "87457867232", pacientesChubut);
 	Ccentro_salud sanLuis("Hospital Luisito", "Juan Labrada 821", "Villa Mercedes", San_Luis, "78362875623", pacientesSanLuis);
 
 	vector<Ccentro_salud*> centros_salud;
 	centros_salud + Favaloro;
 	centros_salud + mendoza;
-	centros_salud + BsAs;
+	//centros_salud + BsAs;
 	centros_salud + chubut;
 	centros_salud + sanLuis;
 
@@ -144,7 +144,7 @@ int main()
 	Csangre* sangreL = new Csangre(O, '-');
 
 	vector<Cregistro*> registrodonante;
-	Cregistro registro(1687023118, 3.2, *sangreM);
+	Cregistro registro(1687023118, 450, *sangreM);
 	registrodonante.push_back(&registro);
 
 	Cdonante mariano(19, 85, false, false, "Mariano", "Viegas Bordeira", "8234652774", 'm', "45413782", 1071943854, registrodonante, sangreM);
@@ -172,7 +172,7 @@ int main()
 	}
 	catch (exception* e) {
 		cout << e->what() << endl;
-		delete e; 
+		delete e;
 	}
 	try {
 		BSA.Buscar_espera();
@@ -188,21 +188,28 @@ int main()
 		cout << e->what() << endl;
 		delete e;
 	}
-	
-	string opcion;
-	cout << "Hola! Usted ha entrado en el Sistema del Banco de Sangre Argentina." << endl
-		<< "Si usted quiere registrarse como DONANTE, ingrese la opción 1." << endl
-		<< "Si usted quiere registrarse o registrar a un familiar/conocido como RECEPTOR, ingrese la opción 2." << endl
+	BSA.imprimir();
+	//Hasta este punto ya se cumplio la consigna, ibamos a agregar un menu, pero en agregar donante y receptor habian algunos problemas asi que decidimos dejarlo asi. Igualmente, el resto de metodos 
+	//se pueden ejecutar si se desea;
+}
+
+	/*string opcion;
+	cout << "Hola! Usted ha ingresado en el Sistema del Banco de Sangre Argentina." << endl
+		 << "Si usted quiere registrar un nuevo DONANTE, ingrese la opción 1." << endl
+		<< "Si usted quiere registrar un nuevo RECEPTOR, ingrese la opción 2." << endl
 		<< "Si usted desea conocer la prioridad de un receptor específico, ingrese la opción 3." << endl
 		<< "Si usted desea imprimir la Lista de Espera de pacientes del Banco de Sangre Argentina, ingrese la opción 4." << endl
 		<< "Si usted desea iniciar los trámites para una futura transfusión, ingrese la opción 5." << endl
-		<< "Si usted desea ver la cantidad de donaciones que se llevan a cabo en cada centro de salud, ingrese la opción 6." << endl;
+		<< "Si usted desea ver la cantidad de donaciones que se llevan a cabo en cada provincia, ingrese la opción 6." << endl;
 	cin >> opcion;
 
 	if (opcion == "1") {
 		Cdonante DonanteRegistrado = registrar_personaD();
 		Ccentro_salud centro1 = seleccionar_centro();
+		try{
 		BSA.agregar_donante(DonanteRegistrado, centro1);
+		}catch{exception* e){
+		cout << e->what() << endl;
 
 	}
 	else if (opcion == "2") {
@@ -210,7 +217,7 @@ int main()
 		Ccentro_salud centro2 = seleccionar_centro();
 		BSA.agregar_receptor(Mateo, centro2);
 	}
-	else if (opcion == "3")
+	if (opcion == "3")
 	{
 		string dniP;
 		cout << "Ingrese el dni de la persona:" << endl;
@@ -263,6 +270,7 @@ Cdonante registrar_personaD()
 	string nombre;
 	string apellido;
 	string dni;
+	char fluido;
 	int dia;
 	int mes;
 	int anio;
@@ -275,7 +283,8 @@ Cdonante registrar_personaD()
 	bool enfermedad;
 	bool tatuajes;
 	string telefono;
-	double litros;
+	Cmedula* medula = new Cmedula();
+	Cplasma* plasma = new Cplasma();
 
 	cout << "Porfavor, ingrese el nombre de la persona." << endl;
 	cin >> nombre;
@@ -287,7 +296,7 @@ Cdonante registrar_personaD()
 	cin >> dia;
 	cout << "Porfavor ingrese el mes de nacimiento de la persona." << endl;
 	cin >> mes;
-	cout << "Porfavor ingrese el mes de nacimiento de la persona." << endl;
+	cout << "Porfavor ingrese el anio de nacimiento de la persona." << endl;
 	cin >> anio;
 	cout << "Porfavor ingrese la edad de la persona." << endl;
 	cin >> edad;
@@ -295,22 +304,20 @@ Cdonante registrar_personaD()
 	cin >> sexo;
 	cout << "Porfavor ingrese el peso (kg) de la persona." << endl;
 	cin >> peso;
-	cout << "Porfavor ingrese la edad de la persona." << endl;
 	cout << "Porfavor ingrese el grupo sanguíneo de la persona (A/B/AB/O)." << endl;
 	cin >> gruposangre;
 	cout << "Porfavor ingrese el factor Rh de la persona (+/-)." << endl;
 	cin >> rh;
-	cout << "Porfavor ingrese el volumen de fluido que desea donar (litros).";
-	cin >> litros;
 	cout << "¿Sufre de enfermedades que sean transmitidas vía sangre, como Hepetitis o Chagas?" << endl
 		<< "En caso afirmativo digite true, caso contrario digite false" << endl;
 	cin >> enfermedad;
-	cout << "¿Se ha realizado tatuaje o piercings en los ultimos dos meses?" << endl;
+	cout << "¿Se ha realizado donaciones o tatuajes en los ultimos dos meses?" << endl;
 	cout << "En caso afirmativo digite true, caso contrario digite false." << endl;
 	cin >> tatuajes;
-	cout << "Porfavor para finalizar ingrese su numero de telefóno.";
+	cout << "Porfavor ingrese su numero de telefóno.";
 	cin >> telefono;
-	cout << "Perfecto, muchas gracias! Le asignaremos un turno a primera hora para el Lunes 26/06/2023." << endl;
+	cout << "Que fluido se desea donar? Ingrese m(medula), p(plasma) o s(sangre)." << endl;
+	cin >> fluido;
 	cout << "Donar Salva vidas!" << endl;
 	if (gruposangre == "A")
 	{
@@ -327,14 +334,28 @@ Cdonante registrar_personaD()
 	else if (gruposangre == "O")
 	{
 		tipo = O;
-	};
-	
+	}
+
+	vector<Cregistro*> registropersona;
+	Csangre* sangreS = new Csangre(tipo, rh);
+
+	if (fluido == 'm') {
+		Cregistro registro_(0, 0, *medula);
+		registropersona.push_back(&registro_);
+	}
+	else if (fluido == 'p')
+	{
+		Cregistro registro_(0, 0, *plasma);
+		registropersona.push_back(&registro_);
+	}
+	else {
+		Cregistro registro_(0, 0, *sangreS);
+		registropersona.push_back(&registro_);
+	}
+
 	time_t fechanac = convertir_fecha(dia, mes, anio);
 
-	Csangre* sangreS = new Csangre(tipo, rh);
-	vector<Cregistro*> registropersona;
-	Cregistro registro_(1687827742, litros, *sangreS);
-	registropersona.push_back(&registro_);
+
 	Cdonante DonanteRegistrado = Cdonante(edad, peso, enfermedad, tatuajes, nombre, apellido, telefono, sexo, dni, fechanac, registropersona, sangreS);
 	return DonanteRegistrado;
 }
@@ -406,11 +427,11 @@ Creceptor registrar_personaR()
 	cin >> diaN;
 	cout << "Porfavor ingrese el mes de nacimiento de la persona." << endl;
 	cin >> mesN;
-	cout << "Porfavor ingrese el mes de nacimiento de la persona." << endl;
+	cout << "Porfavor ingrese el anio de nacimiento de la persona." << endl;
 	cin >> anioN;
 	cout << "Porfavor ingrese el sexo de la persona. Digite f si es mujer, m si es hombre." << endl;
 	cin >> sexoR;
-	cout << "Porfavor introduzca el estado de la persona. (Inestable/Estable). En caso de ya haber recibido la trasnfusión, ingrese listo." << endl;
+	cout << "Porfavor introduzca el estado de la persona. (Inestable/Estable)." << endl;
 	cin >> estado; 
 	cout << "Porfavor ingrese el grupo sanguíneo de la persona (A/B/AB/O)." << endl;
 	cin >> gruposangreR;
@@ -420,7 +441,6 @@ Creceptor registrar_personaR()
 	cin >> necesario;
 	cout << "Porfavor para finalizar ingrese su numero de telefóno.";
 	cin >> telefonoR;
-	cout << "Perfecto, muchas gracias! Le asignaremos un turno a primera hora para el Lunes 26/06/2023." << endl;
 	cout << "Donar Salva vidas!" << endl;
 
 	if (estado == "estable" || estado == "Estable"){
@@ -446,7 +466,7 @@ Creceptor registrar_personaR()
 	else if (gruposangreR == "O")
 	{
 		tipoR = O;
-	};
+	}
 
 	if (necesario == "plasma" || necesario == "Plasma")
 	{
@@ -468,4 +488,4 @@ Creceptor registrar_personaR()
 	Creceptor ReceptorRegistrado = Creceptor(fechaingreso,estado_, nombreR, apellidoR,telefonoR, dniR, sexoR, fechanac, necesita, sangreR);
 	return ReceptorRegistrado;
 	delete necesita; 
-}
+}*/

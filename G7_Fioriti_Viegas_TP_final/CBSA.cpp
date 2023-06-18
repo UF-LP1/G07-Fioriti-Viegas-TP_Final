@@ -268,7 +268,7 @@ void CBSA::donaciones_provincia()
 		std::cout << "Santa Fe: " << acumSantaFe << endl;
 		std::cout << "Catamarca: " << acumCatamarca << endl;
 		std::cout << "Rio Negro: " << acumRioNegro << endl;
-		std::cout << "Santiago del Estero: " << acumSantiago << endl;
+		std::cout << "Santiago del Estero: " << acumSantiago << endl << endl;
 		h++;
 	}
 }
@@ -299,9 +299,16 @@ void CBSA::agregar_donante(Cpaciente& paciente, Ccentro_salud& centro)
 {
 	Cdonante* donante = dynamic_cast<Cdonante*>(&paciente);//como lo paso como paciente, necesito convertirlo a donante
 	int i = 0;
-	if ((*donante).get_edad() <= 65 && (*donante).get_edad() >= 18 && (*donante).get_enfermedades() == false && (*donante).get_meses() == false && (*donante).get_peso() >= 50) {//verifico los requisitos
+	if (donante->get_edad() <= 65 && donante->get_edad() >= 18 && donante->get_enfermedades() == false && donante->get_meses() == false && donante->get_peso() >= 50) {//verifico los requisitos
 		while (i < this->centros.size()) {//recorro los centros
+			if (*this->centros[i] == paciente)
+				throw new exception("El donante ya se encuentra registrado");
 			if (this->centros[i]->get_direccion() == centro.get_direccion() && this->centros[i]->get_nombre() == centro.get_nombre() && this->centros[i]->get_provincia() == centro.get_provincia()) {
+				time_t now = time(NULL);
+				srand(time(NULL));
+				unsigned int random = rand() % (599 - 5);
+				Cregistro registro(now, random, *donante->get_registro()[0]->get_fluido());
+				donante->set_registro(registro);
 				this->centros[i]->agregar_paciente(paciente);//cuando encuentro el centro, agrego al paciente
 				break;
 			}
@@ -317,6 +324,8 @@ void CBSA::agregar_receptor(Cpaciente& receptor, Ccentro_salud& centro)
 {
 	int i = 0;
 	while(i < this->centros.size()) {//recorro la lista de centros
+		if (*this->centros[i] == receptor)
+			throw new exception("El receptor ya se encuantra registrado");
 		if (this->centros[i]->get_direccion() == centro.get_direccion() && this->centros[i]->get_nombre() == centro.get_nombre() && this->centros[i]->get_provincia() == centro.get_provincia())//me fijo que sean el mismo centro
 			this->centros[i]->agregar_paciente(receptor);//agrego al paciente
 		i++;
@@ -348,4 +357,26 @@ vector<Ccentro_salud*> operator-(vector<Ccentro_salud*>& lista, Ccentro_salud& C
 	if (lista.size() == i)
 		std::cout << "No se encontro el centro de salud que se quiere eliminar" << endl;
 	return lista;
+}
+
+bool operator==(Ccentro_salud& centro, Cpaciente& r) {
+	int i = 0;
+	bool iguales = false;
+	while (i < centro.get_lista().size()) {
+		if (centro.get_lista()[i]->get_dni() == r.get_dni())
+			iguales = true;
+		i++;
+	}
+	return iguales;
+}
+
+bool operator!=(Ccentro_salud& centro, Cpaciente& r) {
+	int i = 0;
+	bool diferentes = true;
+	while (i < centro.get_lista().size()) {
+		if (centro.get_lista()[i]->get_dni() == r.get_dni())
+			diferentes = false;
+		i++;
+	}
+	return diferentes;
 }

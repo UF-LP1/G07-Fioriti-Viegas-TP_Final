@@ -18,6 +18,7 @@ public:
 	bool get_meses();
 	vector<Cregistro*> get_registro();
 	void set_meses(bool meses);
+	void set_registro(Cregistro& registro);
 	void nuevo_registro();
 	bool VerificarFechaMax();
 	string to_string();
