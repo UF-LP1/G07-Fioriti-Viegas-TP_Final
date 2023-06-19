@@ -285,6 +285,7 @@ void CBSA::eliminarPaciente(string dni)
 			if (this->centros[i]->get_lista()[j]->get_dni() == dni) {//comparo los dni
 				this->centros[i]->eliminarPa(j);//llamo al metodo eliminar de los centros
 				listo = true;
+				cout << "Se elimino con exito al paciente de la lista." << endl;
 				break;
 			}
 			j++;
@@ -293,6 +294,8 @@ void CBSA::eliminarPaciente(string dni)
 			break;
 		i++;
 	}
+	if (listo == false)
+		cout << "No se encontro una persona con dicho dni en la lista." << endl;
 }
 
 void CBSA::agregar_donante(Cpaciente& paciente, Ccentro_salud& centro)
@@ -331,7 +334,6 @@ void CBSA::agregar_receptor(Cpaciente& receptor, Ccentro_salud& centro)
 		i++;
 	}
 }
-
 
 ostream& operator<<(ostream& out, CBSA& C)
 {
