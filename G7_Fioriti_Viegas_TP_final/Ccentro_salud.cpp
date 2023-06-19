@@ -21,9 +21,59 @@ void Ccentro_salud::imprimir()
 string Ccentro_salud::to_string()
 {
 	stringstream salida;
+	string provincia;//Jujuy, Salta, Formosa, Tucuman, Misiones, San_Luis, San_Juan, Mendoza, Cordoba, Corrientes, Entre_Rios, BsAs, CABA, Neuquen, La_Pampa, Santa_Cruz, Chubut, Tierra_del_Fuego, La_Rioja, Chaco, Santa_Fe, Catamarca, Rio_Negro, Santiago_del_Estero
+	if (this->provincia == 0)
+		provincia = "Jujuy";
+	else if (this->provincia == 1)
+		provincia = "Salta";
+	else if (this->provincia == 2)
+		provincia = "Formosa";
+	else if (this->provincia == 3)
+		provincia = "Tucuman";
+	else if (this->provincia == 4)
+		provincia = "Misiones";
+	else if (this->provincia == 5)
+		provincia = "San Luis";
+	else if (this->provincia == 6)
+		provincia = "San Juan";
+	else if (this->provincia == 7)
+		provincia = "Mendoza";
+	else if (this->provincia == 8)
+		provincia = "Cordoba";
+	else if (this->provincia == 9)
+		provincia = "Corrientes";
+	else if (this->provincia == 10)
+		provincia = "Entre Rios";
+	else if (this->provincia == 11)
+		provincia = "BsAs";
+	else if (this->provincia == 12)
+		provincia = "CABA";
+	else if (this->provincia == 13)
+		provincia = "Neuquen";
+	else if (this->provincia == 14)
+		provincia = "La Pampa";
+	else if (this->provincia == 15)
+		provincia = "Santa Cruz";
+	else if (this->provincia == 16)
+		provincia = "Chubut";
+	else if (this->provincia == 17)
+		provincia = "Tierra del Fuego";
+	else if (this->provincia == 18)
+		provincia = "La Rioja";
+	else if (this->provincia == 19)
+		provincia = "Chaco";
+	else if (this->provincia == 20)
+		provincia = "Santa Fe";
+	else if (this->provincia == 21)
+		provincia = "Catamarca";
+	else if (this->provincia == 22)
+		provincia = "Rio Negro";
+	else if (this->provincia == 23)
+		provincia = "Santiago Del Estero";
+
 	salida << "Nombre del establecimiento: " << this->nombre << endl << "Direccion: " << this->direccion << endl
-		<< "Partido: " << this->partido << endl <<"Provincia: " << this->provincia << endl <<
-		"Telefono: " << this->telefono << endl;
+		<< "Partido: " << this->partido << endl <<"Provincia: " << provincia << endl <<
+		"Telefono: " << this->telefono << endl << endl;
 	salida << "Pacientes del centro de salud: " << endl;
 	int i = 0;
 	while(i != this->pacientes.size()) {

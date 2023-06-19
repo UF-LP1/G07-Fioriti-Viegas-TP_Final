@@ -81,7 +81,7 @@ string Cdonante::to_string()
 	tm* nacer = new tm;
 	localtime_s(nacer, &this->fecha);
 	salida << "Los datos del donante son: " << endl;
-	salida << "Nombre y apellido: " << this->nombre << this->apellido << endl;
+	salida << "Nombre y apellido: " << this->nombre << ", " << this->apellido << endl;
 	salida << "Nacimiento: " << nacer->tm_mday << "/" << nacer->tm_mon + 1 << "/" << nacer->tm_year + 1900 << endl;
 	salida << "Sexo: " << this->sexo << endl;
 	salida << "DNI: " << this->dni << endl;

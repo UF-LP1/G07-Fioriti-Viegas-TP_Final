@@ -3,10 +3,10 @@
 #include "Cpaciente.h"
 #include "Creceptor.h"
 
-time_t convertir_fecha( int dia, int mes, int anio);
+/*time_t convertir_fecha(int dia, int mes, int anio);
 Cdonante registrar_personaD();
 Ccentro_salud seleccionar_centro();
-Creceptor registrar_personaR();
+Creceptor registrar_personaR();*/
 
 int main()
 {
@@ -169,9 +169,9 @@ int main()
 	pacientesChubut + lorenzo;
 	pacientesChubut + juancho;
 
-	Cdonante Dolores(19, 64.1, false, false, "dolores", "monteros", "23726575889", 'f', "45474635", 1013976026, registroSanLuis, sangre1);
-	Cdonante Matias(26, 79.1, false, false, "matias", "aguerre", "2975781601", 'm', "39881491", 795028879, registroSanLuis, sangre3);
-	Cdonante Agustin(41, 97.8, false, false, "agustin", "murphy", "2978643192", 'm', "330987671", 389727465, registroSanLuis, sangre8);
+	Cdonante Dolores(19, 64.1, false, false, "dolores", "monteros", "23726575889", 'f', "45474635", 1013976026, registroCatamarca, sangre1);
+	Cdonante Matias(26, 79.1, false, false, "matias", "aguerre", "2975781601", 'm', "39881491", 795028879, registroCatamarca, sangre3);
+	Cdonante Agustin(41, 97.8, false, false, "agustin", "murphy", "2978643192", 'm', "330987671", 389727465, registroCatamarca, sangre8);
 	Creceptor Samanta(1682360162, estable, "samanta", "levy", "82346546325", "45522914", 'f', 423432049, sangre2, sangre5);
 	Creceptor Takeo(1681755382, inestable, "takeo", "najira", "82346546325", "45522914", 'm', 987537668, medula, sangre7);
 	Creceptor Enrique(1685038607, recibida6, recibio, "enrique", "tomori", "82346546325", "45522914", 'm', 935870496, plasma, sangre8);
@@ -225,6 +225,7 @@ int main()
 	Cdonante mariano(19, 85, false, false, "Mariano", "Viegas Bordeira", "8234652774", 'm', "45413782", 1071943854, registrodonante, sangreM);
 	Creceptor lebron(1685643218, estable, "LeBron Raymone", "James Sr", "8273467389", "40328746", 'm', 473278599, sangreL, sangreL);
 
+	cout << "Se agrega el nuevo donante al centro correspondiente." << endl << endl;
 	try {
 		BSA.agregar_donante(mariano, chubut);//agrego al donante nuevo
 	}
@@ -232,6 +233,10 @@ int main()
 		cout << e->what() << endl;
 		delete e;
 	}
+	cout << "Aprete cualquier boton para continuar." << endl;
+	getchar();
+	system("CLS");
+	cout << "Se agrega el nuevo receptor al centro correspondiente." << endl << endl;
 	try {
 		BSA.agregar_receptor(lebron, Favaloro);//agrego al receptor nuevo
 	}
@@ -239,9 +244,15 @@ int main()
 		cout << e->what() << endl;
 		delete e;
 	}
-
+	cout << "Aprete cualquier boton para continuar." << endl;
+	getchar();
+	system("CLS");
+	cout << "Se busca la prioridad de un paciente en base al dni unico del mismo." << endl << endl;
 	cout << "El paciente con dni 45474635 tiene una prioridad de " << BSA.buscar_prioridad_receptor("45522914") << " en una escala de 0 a 5." << endl;
-
+	cout << "Aprete cualquier boton para continuar." << endl;
+	getchar();
+	system("CLS");
+	cout << "Empieza el procedimiento de trasfusion." << endl << endl;
 	try {
 		BSA.empezar_transfusion();
 	}
@@ -249,6 +260,10 @@ int main()
 		cout << e->what() << endl;
 		delete e;
 	}
+	cout << "Aprete cualquier boton para continuar." << endl;
+	getchar();
+	system("CLS");
+	cout << "Se imprime la lista de espera de los centros de salud."<< endl << endl;
 	try {
 		BSA.Buscar_espera();
 	}
@@ -256,6 +271,10 @@ int main()
 		cout << e->what() << endl;
 		delete e;
 	}
+	cout << "Aprete cualquier boton para continuar." << endl;
+	getchar();
+	system("CLS");
+	cout << "Se imprime las estadisticas de donaciones en cada provincia hasta el mes actual de este mismo anio." << endl << endl;
 	try {
 		BSA.donaciones_provincia();
 	}
@@ -263,7 +282,12 @@ int main()
 		cout << e->what() << endl;
 		delete e;
 	}
+	cout << "Aprete cualquier boton para continuar." << endl;
+	getchar();
+	system("CLS");
+	cout << "Se imprimen los datos del Banco de Sangre de Argentina." << endl << endl;
 	BSA.imprimir();
+
 	//Hasta este punto ya se cumplio la consigna, ibamos a agregar un menu, pero en agregar donante y receptor habian algunos problemas asi que decidimos dejarlo asi. Igualmente, el resto de metodos 
 	//se pueden ejecutar si se desea;
 

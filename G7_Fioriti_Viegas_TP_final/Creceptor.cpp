@@ -67,6 +67,13 @@ string Creceptor::to_string()
 	localtime_s(nacer, &this->fecha);
 	tm* espera = new tm;
 	localtime_s(espera, &this->fecha_ingreso);
+	string estado;
+	if (this->estado == 0)
+		estado = "estable";
+	else if (this->estado == 1)
+		estado = "inestable";
+	else if (this->estado == 2)
+		estado = "recibio";
 	out << "Los datos del receptor son: " << endl;
 	out << "Nombre: " << this->apellido << ", " << this->nombre << endl;
 	out << "Nacimiento: " << nacer->tm_mday << "/" << nacer->tm_mon + 1 << "/" << nacer->tm_year + 1900 << endl;
@@ -75,7 +82,7 @@ string Creceptor::to_string()
 	out << "Telefono: " << this->telefono << endl;
 	out << "Fecha de espera: " << espera->tm_mday << "/" << espera->tm_mon + 1 << "/" << espera->tm_year + 1900 << endl;
 	out << "Prioridad: " << this->prioridad << endl;
-	out << "Estado: " << this->estado << endl;
+	out << "Estado: " << estado << endl;
 	delete espera;
 	delete nacer;
 	return out.str();
