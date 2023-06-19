@@ -332,7 +332,7 @@ int main()
 	centros_salud + chubut;
 	centros_salud + sanLuis;
 	centros_salud + SantaFe;
-	//centros_salud + Catamarca;
+	//centros_salud + Catamarca; Presenta fallos
 
 
 	CBSA BSA(centros_salud);
