@@ -206,7 +206,7 @@ int main()
 	vector<Ccentro_salud*> centros_salud;
 	centros_salud + Favaloro;
 	centros_salud + mendoza;
-	//centros_salud + BsAs;
+	//centros_salud + BsAs; Presenta fallos
 	centros_salud + chubut;
 	centros_salud + sanLuis;
 	centros_salud + SantaFe;
@@ -288,6 +288,23 @@ int main()
 	cout << "Se imprimen los datos del Banco de Sangre de Argentina." << endl << endl;
 	BSA.imprimir();
 
+	delete recibida1;
+	delete recibida2;
+	delete recibida3;
+	delete recibida4;
+	delete recibida5;
+	delete sangreM;
+	delete sangreL;
+	delete sangre1;
+	delete sangre2;
+	delete sangre3;
+	delete sangre4;
+	delete sangre5;
+	delete sangre6;
+	delete sangre7;
+	delete sangre8;
+	delete medula;
+	delete plasma;
 	//Hasta este punto ya se cumplio la consigna, ibamos a agregar un menu, pero en agregar donante y receptor habian algunos problemas asi que decidimos dejarlo asi. Igualmente, el resto de metodos 
 	//se pueden ejecutar si se desea;
 
@@ -331,23 +348,6 @@ int main()
 	else if (opcion == "6")
 		BSA.donaciones_provincia();
 	*/
-	delete recibida1;
-	delete recibida2;
-	delete recibida3;
-	delete recibida4;
-	delete recibida5;
-	delete sangreM;
-	delete sangreL;
-	delete sangre1;
-	delete sangre2;
-	delete sangre3;
-	delete sangre4;
-	delete sangre5;
-	delete sangre6;
-	delete sangre7;
-	delete sangre8;
-	delete medula;
-	delete plasma;
 }
 /*
 time_t convertir_fecha(int dia,int  mes,int  anio)
