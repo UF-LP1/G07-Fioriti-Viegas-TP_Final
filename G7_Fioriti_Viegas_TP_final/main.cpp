@@ -23,23 +23,23 @@ int main()
 	Cplasma* plasma = new Cplasma();
 	Cmedula* medula = new Cmedula();
 
-	vector<Cregistro*>registroSanLuis1;
-	Cregistro registro1SL(1684350560, 450, *sangre1);
+	vector<Cregistro*> registroSanLuis1;
+	Cregistro registro1SL(1675020267, 450, *sangre1);
 	Cregistro registro2SL(1679599437, 5, *medula);
-	Cregistro registro3SL(1675020267, 600, *plasma);
+	Cregistro registro3SL(1684350560, 600, *plasma);
 	registroSanLuis1.push_back(&registro1SL);
 	registroSanLuis1.push_back(&registro2SL);
 	registroSanLuis1.push_back(&registro3SL);
 
-	vector<Cregistro*>registroSanLuis2;
-	Cregistro registro1SanLuis(1684354521, 430, *sangre1);
-	Cregistro registro2SanLuis(1479578161, 7, *medula);
-	Cregistro registro3SanLuis(1655081711, 570, *plasma);
+	vector<Cregistro*> registroSanLuis2;
+	Cregistro registro1SanLuis(1479578161, 430, *sangre1);
+	Cregistro registro2SanLuis(1655081711, 7, *medula);
+	Cregistro registro3SanLuis(1684354521, 570, *plasma);
 	registroSanLuis2.push_back(&registro1SanLuis);
 	registroSanLuis2.push_back(&registro2SanLuis);
 	registroSanLuis2.push_back(&registro3SanLuis);
 
-	vector<Cregistro*>registroSanLuis3;
+	vector<Cregistro*> registroSanLuis3;
 	Cregistro registro1sanluis(1668721401, 510, *sangre1);
 	Cregistro registro2sanluis(1691815012, 4, *medula);
 	Cregistro registro3sanluis(1687191071, 380, *plasma);
@@ -49,7 +49,7 @@ int main()
 
 
 
-	vector<Cregistro*>registroBsAs1;
+	vector<Cregistro*> registroBsAs1;
 	Cregistro registro1BSAS(1675538711, 450, *sangre2);
 	Cregistro registro2BSAS(1675538711, 5, *medula);
 	Cregistro registro3BSAS(1669749977, 160, *plasma);
@@ -200,13 +200,13 @@ int main()
 	registroCatamarca3.push_back(&registro3cata);
 
 
-	vector<Cpaciente*>pacientesFavaloro;
-	vector<Cpaciente*>pacientesMendoza;
-	vector<Cpaciente*>pacientesBsAs;
-	vector<Cpaciente*>pacientesChubut;
-	vector<Cpaciente*>pacientesSanLuis;
-	vector<Cpaciente*>pacientesSantaFe;
-	vector<Cpaciente*>pacientesCatamarca;
+	vector<Cpaciente*> pacientesFavaloro;
+	vector<Cpaciente*> pacientesMendoza;
+	vector<Cpaciente*> pacientesBsAs;
+	vector<Cpaciente*> pacientesChubut;
+	vector<Cpaciente*> pacientesSanLuis;
+	vector<Cpaciente*> pacientesSantaFe;
+	vector<Cpaciente*> pacientesCatamarca;
 
 
 
